@@ -4,3 +4,4 @@ dist/*
 build/*
 __pycache__
 mainwindow.spec
+ui_mainwindow.py
