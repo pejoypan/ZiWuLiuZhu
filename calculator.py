@@ -112,6 +112,11 @@ class Calculator():
 
         self.base_date = date(1940, 9, 18) # 甲子日
 
+        self.NaZi_lut = pd.read_csv('csv/NaZi.csv', encoding='UTF-8')
+        logger.info(self.NaZi_lut)
+
+
+
     # 计算日天干
     def get_date_tian_gan(self, input_date):
         delta_days = (input_date - self.base_date).days
@@ -186,3 +191,9 @@ class Calculator():
     def calc_FeiTeng8(self, hour_gan):
 
         return self.FeiTeng8_lut[hour_gan][0], self.FeiTeng8_lut[hour_gan][1], self.FeiTeng8_lut[hour_gan][2], self.FeiTeng8_lut[hour_gan][3]
+
+    def calc_NaZi(self, hour_zhi):
+
+        row = self.NaZi_lut[self.NaZi_lut.iloc[:, 0] == hour_zhi]
+
+        return row.iloc[0, 1], row.iloc[0, 2], row.iloc[0, 3], row.iloc[0, 4], row.iloc[0, 5], row.iloc[0, 6]

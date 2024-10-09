@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QButtonGroup
 from PySide6.QtCore import QFile, QDate, QTime, Signal, Slot
 from ui_mainwindow import Ui_MainWindow
 import yaml
@@ -33,6 +33,7 @@ infos = {
     'program': '~',
     'order': '~',
     'type': '~',
+    'acupoint': '~',
     'output': {
         'date_gan': '~',
         'date_zhi': '~',
@@ -52,6 +53,14 @@ infos = {
             'ZhuXue': '~',
             'PeiXue': '~'
             },
+        'NaZi': {
+            'Bu1': '~',
+            'Bu2': '~',
+            'Bu3': '~',
+            'XieXue': '~',
+            'BenXue': '~',
+            'YuanXue': '~'
+            },
         }
     }
 
@@ -64,9 +73,16 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super(MainWindow, self).__init__()
+
         self.calculator = Calculator()
+
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.ui.acupoint_choices = QButtonGroup()
+        self.ui.program_choices = QButtonGroup()
+        self.build_button_group()
+
         self.ui.dateEdit.setDate(current_date)
         self.ui.timeEdit.setTime(current_time)
         self.ui.verticalWidget_choose_acupoint.hide()
@@ -86,10 +102,6 @@ class MainWindow(QMainWindow):
         self.ui.lineEdit.editingFinished.connect(self.on_input_name)
         self.ui.dateEdit.userDateChanged.connect(self.on_input_date)
         self.ui.timeEdit.userTimeChanged.connect(self.on_input_time)
-        self.ui.radioButton_NaJia.clicked.connect(self.on_click_NaJia)
-        self.ui.radioButton_NaZi.clicked.connect(self.on_click_NaZi)
-        self.ui.radioButton_LingGui8.clicked.connect(self.on_click_LingGui8)
-        self.ui.radioButton_FeiTeng8.clicked.connect(self.on_click_FeiTeng8)
         self.ui.radioButton_NaZi.clicked.connect(self.retranslate_NaZi)
         self.ui.radioButton_NaJia.clicked.connect(self.retranslate_NaJia)
         self.ui.radioButton_LingGui8.clicked.connect(self.retranslate_LingGui8)
@@ -97,6 +109,22 @@ class MainWindow(QMainWindow):
         self.ui.comboBox_order.activated.connect(self.on_select_order)
         self.ui.comboBox_type.activated.connect(self.on_select_type)
         self.input_edited.connect(self.update_output)
+        self.ui.acupoint_choices.buttonClicked.connect(self.on_select_acupoint)
+        self.ui.program_choices.buttonClicked.connect(self.on_select_program)
+
+
+    def build_button_group(self):
+        self.ui.program_choices.addButton(self.ui.radioButton_NaJia)
+        self.ui.program_choices.addButton(self.ui.radioButton_NaZi)
+        self.ui.program_choices.addButton(self.ui.radioButton_LingGui8)
+        self.ui.program_choices.addButton(self.ui.radioButton_FeiTeng8)
+
+        self.ui.acupoint_choices.addButton(self.ui.radioButton_a)
+        self.ui.acupoint_choices.addButton(self.ui.radioButton_b)
+        self.ui.acupoint_choices.addButton(self.ui.radioButton_c)
+        self.ui.acupoint_choices.addButton(self.ui.radioButton_d)
+        self.ui.acupoint_choices.addButton(self.ui.radioButton_e)
+        self.ui.acupoint_choices.addButton(self.ui.radioButton_f)
 
         
     @Slot()
@@ -119,24 +147,10 @@ class MainWindow(QMainWindow):
         infos['time']['minute'] = given_time.minute()
         self.input_edited.emit(1)
 
-    @Slot()
-    def on_click_NaJia(self):
-        infos['program'] = 'NaJia'
-        self.input_edited.emit(1)
 
     @Slot()
-    def on_click_NaZi(self):
-        infos['program'] = 'NaZi'
-        self.input_edited.emit(1)
-
-    @Slot()
-    def on_click_LingGui8(self):
-        infos['program'] = 'LingGui8'
-        self.input_edited.emit(1)
-
-    @Slot()
-    def on_click_FeiTeng8(self):
-        infos['program'] = 'FeiTeng8'
+    def on_select_program(self):
+        infos['program'] = self.ui.program_choices.checkedButton().text()
         self.input_edited.emit(1)
 
     @Slot()
@@ -148,6 +162,12 @@ class MainWindow(QMainWindow):
     def on_select_type(self):
         infos['type'] = self.ui.comboBox_type.currentText()
         self.input_edited.emit(1)
+
+    @Slot()
+    def on_select_acupoint(self):
+        infos['acupoint'] = self.ui.acupoint_choices.checkedButton().text()
+        self.input_edited.emit(1)
+
 
     @Slot()
     def update_output(self):
@@ -166,11 +186,16 @@ class MainWindow(QMainWindow):
 
         self.update_LingGui8()
         self.update_FeiTeng8()
+        self.update_NaZi()
 
         if self.ui.radioButton_FeiTeng8.isChecked():
             self.retranslate_FeiTeng8()
         elif self.ui.radioButton_LingGui8.isChecked():
             self.retranslate_LingGui8()
+        elif self.ui.radioButton_NaZi.isChecked():
+            self.retranslate_NaZi()
+        elif self.ui.radioButton_NaJia.isChecked():
+            self.retranslate_NaJia()
         else:
             pass
 
@@ -199,6 +224,18 @@ class MainWindow(QMainWindow):
         infos['output']['FeiTeng8']['ZhuXue'] = zhu_xue
         infos['output']['FeiTeng8']['PeiXue'] = pei_xue
 
+    def update_NaZi(self):
+        hour_zhi = infos['output']['hour_zhi']
+
+        bu1, bu2, bu3, xie_xue, ben_xue, yuan_xue = self.calculator.calc_NaZi(hour_zhi)
+
+        infos['output']['NaZi']['Bu1'] = bu1
+        infos['output']['NaZi']['Bu2'] = bu2
+        infos['output']['NaZi']['Bu3'] = bu3
+        infos['output']['NaZi']['XieXue'] = xie_xue
+        infos['output']['NaZi']['BenXue'] = ben_xue
+        infos['output']['NaZi']['YuanXue'] = yuan_xue
+
 
     @Slot()
     def retranslate_NaZi(self):
@@ -208,6 +245,12 @@ class MainWindow(QMainWindow):
         self.ui.label_d.setText('\u6cc4\u7a74') # 泄穴
         self.ui.label_e.setText('\u672c\u7a74') # 本穴
         self.ui.label_f.setText('\u539f\u7a74') # 原穴
+        self.ui.radioButton_a.setText(infos['output']['NaZi']['Bu1'])
+        self.ui.radioButton_b.setText(infos['output']['NaZi']['Bu2'])
+        self.ui.radioButton_c.setText(infos['output']['NaZi']['Bu3'])
+        self.ui.radioButton_d.setText(infos['output']['NaZi']['XieXue'])
+        self.ui.radioButton_e.setText(infos['output']['NaZi']['BenXue'])
+        self.ui.radioButton_f.setText(infos['output']['NaZi']['YuanXue'])
 
     @Slot()
     def retranslate_NaJia(self):
