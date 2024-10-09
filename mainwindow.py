@@ -75,7 +75,9 @@ current_time = QTime.currentTime()
 
 class MainWindow(QMainWindow):
 
-    input_edited = Signal(int)
+    date_time_edited = Signal(int)
+    gan_zhi_updated = Signal(int)
+    acupoint_updated = Signal(int)
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -85,38 +87,50 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.acupoint_choices = QButtonGroup()
         self.ui.program_choices = QButtonGroup()
         self.build_button_group()
 
+        self.ui.Slider_NaJia.hide()
+        self.ui.Slider_NaZi.hide()
+
         self.ui.dateEdit.setDate(current_date)
         self.ui.timeEdit.setTime(current_time)
-        self.ui.verticalWidget_choose_acupoint.hide()
+
         infos['name'] = self.ui.lineEdit.text()
+
         infos['date']['year'] = self.ui.dateEdit.date().year()
         infos['date']['month'] = self.ui.dateEdit.date().month()
         infos['date']['day'] = self.ui.dateEdit.date().day()
+
         infos['time']['hour'] = self.ui.timeEdit.time().hour()
         infos['time']['minute'] = self.ui.timeEdit.time().minute()
         # infos['program'] 
         infos['order'] = self.ui.comboBox_order.currentText()
         infos['type'] = self.ui.comboBox_type.currentText()
-        self.update_output()
+
+        self.update_gan_zhi()
+        self.update_all_acupoint()
         self.create_connect()
     
     def create_connect(self):
         self.ui.lineEdit.editingFinished.connect(self.on_input_name)
         self.ui.dateEdit.userDateChanged.connect(self.on_input_date)
         self.ui.timeEdit.userTimeChanged.connect(self.on_input_time)
-        self.ui.radioButton_NaZi.clicked.connect(self.retranslate_NaZi)
-        self.ui.radioButton_NaJia.clicked.connect(self.retranslate_NaJia)
-        self.ui.radioButton_LingGui8.clicked.connect(self.retranslate_LingGui8)
-        self.ui.radioButton_FeiTeng8.clicked.connect(self.retranslate_FeiTeng8)
+
         self.ui.comboBox_order.activated.connect(self.on_select_order)
         self.ui.comboBox_type.activated.connect(self.on_select_type)
-        self.input_edited.connect(self.update_output)
-        self.ui.acupoint_choices.buttonClicked.connect(self.on_select_acupoint)
+
+        self.date_time_edited.connect(self.update_gan_zhi)
+        self.gan_zhi_updated.connect(self.update_all_acupoint)
+        self.acupoint_updated.connect(self.update_acupoint)
+
         self.ui.program_choices.buttonClicked.connect(self.on_select_program)
+        self.ui.program_choices.buttonClicked.connect(self.update_acupoint)
+
+        self.ui.Slider_NaJia.valueChanged.connect(self.on_move_slider_NaJia)
+        self.ui.Slider_NaZi.valueChanged.connect(self.on_move_slider_NaZi)
+
+        self.ui.pushButton.clicked.connect(self.on_generate)
 
 
     def build_button_group(self):
@@ -125,18 +139,14 @@ class MainWindow(QMainWindow):
         self.ui.program_choices.addButton(self.ui.radioButton_LingGui8)
         self.ui.program_choices.addButton(self.ui.radioButton_FeiTeng8)
 
-        self.ui.acupoint_choices.addButton(self.ui.radioButton_a)
-        self.ui.acupoint_choices.addButton(self.ui.radioButton_b)
-        self.ui.acupoint_choices.addButton(self.ui.radioButton_c)
-        self.ui.acupoint_choices.addButton(self.ui.radioButton_d)
-        self.ui.acupoint_choices.addButton(self.ui.radioButton_e)
-        self.ui.acupoint_choices.addButton(self.ui.radioButton_f)
+    @Slot()
+    def on_generate(self):
+        logger.info(infos)
 
         
     @Slot()
     def on_input_name(self):
         infos['name'] = self.ui.lineEdit.text()
-        self.input_edited.emit(1)
 
     @Slot()
     def on_input_date(self):
@@ -144,39 +154,93 @@ class MainWindow(QMainWindow):
         infos['date']['year'] = given_date.year()
         infos['date']['month'] = given_date.month()
         infos['date']['day'] = given_date.day()
-        self.input_edited.emit(1)
+        self.date_time_edited.emit(1)
 
     @Slot()
     def on_input_time(self):
         given_time = self.ui.timeEdit.time()
         infos['time']['hour'] = given_time.hour()
         infos['time']['minute'] = given_time.minute()
-        self.input_edited.emit(1)
+        self.date_time_edited.emit(1)
 
 
     @Slot()
     def on_select_program(self):
         infos['program'] = self.ui.program_choices.checkedButton().text()
-        self.input_edited.emit(1)
 
     @Slot()
     def on_select_order(self):
         infos['order'] = self.ui.comboBox_order.currentText()
-        self.input_edited.emit(1)
 
     @Slot()
     def on_select_type(self):
         infos['type'] = self.ui.comboBox_type.currentText()
-        self.input_edited.emit(1)
+
+    @Slot(int)
+    def on_move_slider_NaJia(self, value):
+        if 0 <= value < 25:
+            infos['acupoint'] = self.ui.label_NaJia1.text()
+            self.remove_label_highlight()
+            self.ui.label_NaJia1.setStyleSheet("color: red;")
+        elif 25 <= value < 50:
+            infos['acupoint'] = self.ui.label_NaJia2.text()
+            self.remove_label_highlight()
+            self.ui.label_NaJia2.setStyleSheet("color: red;")
+        elif 50 <= value < 75:
+            infos['acupoint'] = self.ui.label_NaJia3.text()
+            self.remove_label_highlight()
+            self.ui.label_NaJia3.setStyleSheet("color: red;")
+        elif 75 <= value <= 100:
+            infos['acupoint'] = self.ui.label_NaJia4.text()
+            self.remove_label_highlight()
+            self.ui.label_NaJia4.setStyleSheet("color: red;")
+        else:
+            pass
+
+    @Slot(int)
+    def on_move_slider_NaZi(self, value):
+        if 0 <= value < 17:
+            infos['acupoint'] = self.ui.label_NaZi1.text()
+            self.remove_label_highlight()
+            self.ui.label_NaZi1.setStyleSheet("color: red;")
+        elif 17 <= value < 33:
+            infos['acupoint'] = self.ui.label_NaZi2.text()
+            self.remove_label_highlight()
+            self.ui.label_NaZi2.setStyleSheet("color: red;")
+        elif 33 <= value < 50:
+            infos['acupoint'] = self.ui.label_NaZi3.text()
+            self.remove_label_highlight()
+            self.ui.label_NaZi3.setStyleSheet("color: red;")
+        elif 50 <= value <= 67:
+            infos['acupoint'] = self.ui.label_NaZi4.text()
+            self.remove_label_highlight()
+            self.ui.label_NaZi4.setStyleSheet("color: red;")
+        elif 67 <= value < 83:
+            infos['acupoint'] = self.ui.label_NaZi5.text()
+            self.remove_label_highlight()
+            self.ui.label_NaZi5.setStyleSheet("color: red;")
+        elif 83 <= value <= 100:
+            infos['acupoint'] = self.ui.label_NaZi6.text()
+            self.remove_label_highlight()
+            self.ui.label_NaZi6.setStyleSheet("color: red;")
+        else:
+            pass
+
+    def remove_label_highlight(self):
+        self.ui.label_NaJia1.setStyleSheet("")
+        self.ui.label_NaJia2.setStyleSheet("")
+        self.ui.label_NaJia3.setStyleSheet("")
+        self.ui.label_NaJia4.setStyleSheet("")
+        self.ui.label_NaZi1.setStyleSheet("")
+        self.ui.label_NaZi2.setStyleSheet("")
+        self.ui.label_NaZi3.setStyleSheet("")
+        self.ui.label_NaZi4.setStyleSheet("")
+        self.ui.label_NaZi5.setStyleSheet("")
+        self.ui.label_NaZi6.setStyleSheet("")
+
 
     @Slot()
-    def on_select_acupoint(self):
-        infos['acupoint'] = self.ui.acupoint_choices.checkedButton().text()
-        self.input_edited.emit(1)
-
-
-    @Slot()
-    def update_output(self):
+    def update_gan_zhi(self):
         input_time = datetime(infos['date']['year'], infos['date']['month'], infos['date']['day'], infos['time']['hour'], infos['time']['minute'])
         date_gan, date_zhi, hour_gan, hour_zhi = self.calculator.get_gan_zhi(input_time)
 
@@ -193,24 +257,41 @@ class MainWindow(QMainWindow):
         self.ui.label_date_gan_zhi.setText(f'{date_gan}{date_zhi}日 {date_idx}')
         self.ui.label_hour_gan_zhi.setText(f'{hour_gan}{hour_zhi}时 {hour_idx}')
 
-        self.update_LingGui8()
-        self.update_FeiTeng8()
-        self.update_NaZi()
-        self.update_NaJia()
+        self.gan_zhi_updated.emit(1)
 
-        if self.ui.radioButton_FeiTeng8.isChecked():
-            self.retranslate_FeiTeng8()
-        elif self.ui.radioButton_LingGui8.isChecked():
-            self.retranslate_LingGui8()
+    @Slot()
+    def update_all_acupoint(self):
+        self.calc_acupoint()
+        self.retranslate_acupoint()
+        self.acupoint_updated.emit(1)
+
+
+    def calc_acupoint(self):
+        self.update_FeiTeng8()
+        self.update_LingGui8()
+        self.update_NaJia()
+        self.update_NaZi()
+
+    def retranslate_acupoint(self):
+        self.retranslate_NaJia()
+        self.retranslate_NaZi()
+        self.retranslate_LingGui8()
+        self.retranslate_FeiTeng8()
+    
+    @Slot()
+    def update_acupoint(self):
+        self.remove_label_highlight()
+        if self.ui.radioButton_NaJia.isChecked():
+            self.on_move_slider_NaJia(self.ui.Slider_NaJia.value())
         elif self.ui.radioButton_NaZi.isChecked():
-            self.retranslate_NaZi()
-        elif self.ui.radioButton_NaJia.isChecked():
-            self.retranslate_NaJia()
+            self.on_move_slider_NaZi(self.ui.Slider_NaZi.value())
+        elif self.ui.radioButton_LingGui8.isChecked():
+            infos['acupoint'] = self.ui.label_LingGui3.text()
+        elif self.ui.radioButton_FeiTeng8.isChecked():
+            infos['acupoint'] = self.ui.label_FeiTeng3.text()
         else:
             pass
 
-
-        logger.info(infos)
 
 
     def update_LingGui8(self):
@@ -253,63 +334,41 @@ class MainWindow(QMainWindow):
         infos['output']['NaJia']['AdditionalXue'] = bu_chong_xue
 
 
-    @Slot()
     def retranslate_NaZi(self):
-        self.ui.label_a.setText('\u88651')      # 补1
-        self.ui.label_b.setText('\u88652')      # 补2
-        self.ui.label_c.setText('\u88653')      # 补3
-        self.ui.label_d.setText('\u6cc4\u7a74') # 泄穴
-        self.ui.label_e.setText('\u672c\u7a74') # 本穴
-        self.ui.label_f.setText('\u539f\u7a74') # 原穴
-        self.ui.radioButton_a.setText(infos['output']['NaZi']['Bu1'])
-        self.ui.radioButton_b.setText(infos['output']['NaZi']['Bu2'])
-        self.ui.radioButton_c.setText(infos['output']['NaZi']['Bu3'])
-        self.ui.radioButton_d.setText(infos['output']['NaZi']['XieXue'])
-        self.ui.radioButton_e.setText(infos['output']['NaZi']['BenXue'])
-        self.ui.radioButton_f.setText(infos['output']['NaZi']['YuanXue'])
+        self.ui.label_NaZi1.setText(infos['output']['NaZi']['Bu1'])
+        self.ui.label_NaZi2.setText(infos['output']['NaZi']['Bu2'])
+        self.ui.label_NaZi3.setText(infos['output']['NaZi']['Bu3'])
+        self.ui.label_NaZi4.setText(infos['output']['NaZi']['XieXue'])
+        self.ui.label_NaZi5.setText(infos['output']['NaZi']['BenXue'])
+        self.ui.label_NaZi6.setText(infos['output']['NaZi']['YuanXue'])
 
-    @Slot()
     def retranslate_NaJia(self):
-        self.ui.label_a.setText('\u4e3b\u7a74') # 主穴
-        self.ui.label_b.setText('\u539f\u7a74') # 原穴
-        self.ui.label_c.setText('\u4eca\u65e5\n\u4e92\u7528\u7a74') # 今日互用穴
-        self.ui.label_d.setText('\u8865\u5145\n\u7a74\u4f4d')       # 补充穴位
-        self.ui.radioButton_a.setText(infos['output']['NaJia']['ZhuXue'])
-        self.ui.radioButton_b.setText(infos['output']['NaJia']['YuanXue'])
-        self.ui.radioButton_c.setText(infos['output']['NaJia']['TodayHuYongXue'])
-        self.ui.radioButton_d.setText(infos['output']['NaJia']['AdditionalXue'])
+        self.ui.label_NaJia1.setText(infos['output']['NaJia']['ZhuXue'])
+        self.ui.label_NaJia2.setText(infos['output']['NaJia']['YuanXue'])
+        self.ui.label_NaJia3.setText(infos['output']['NaJia']['TodayHuYongXue'])
+        self.ui.label_NaJia4.setText(infos['output']['NaJia']['AdditionalXue'])
 
-    @Slot()
     def retranslate_LingGui8(self):
-        self.ui.label_a.setText('\u4e5d\u5bab\u6570') # 九宫数
-        self.ui.label_b.setText('\u5366') # 卦
-        self.ui.label_c.setText('\u4e3b\u7a74') # 主穴
-        self.ui.label_d.setText('\u914d\u7a74') # 配穴
         jiu_gong_shu = infos['output']['LingGui8']['JiuGongShu']
+        self.ui.label_LingGui1.setText(str(jiu_gong_shu))
+
         hexagram = infos['output']['LingGui8']['Hexagram']
-        zhu_xue = infos['output']['LingGui8']['ZhuXue']
-        pei_xue = infos['output']['LingGui8']['PeiXue']
-        self.ui.label_digit.setText(str(jiu_gong_shu))
-
         str_hexagram = f'{hexagram}{hexagram_map[hexagram]}' if hexagram in hexagram_map else hexagram
-        self.ui.label_hexgram.setText(str_hexagram)
-        self.ui.label_ZhuXue.setText(zhu_xue)
-        self.ui.label_PeiXue.setText(pei_xue)
+        self.ui.label_LingGui2.setText(str_hexagram)
 
-    @Slot()
+        self.ui.label_LingGui3.setText(infos['output']['LingGui8']['ZhuXue'])
+        self.ui.label_LingGui4.setText(infos['output']['LingGui8']['PeiXue'])
+
     def retranslate_FeiTeng8(self):
-        self.ui.label_a.setText('\u5366\u4f4d') # 卦位
-        self.ui.label_b.setText('\u5366') # 卦
-        self.ui.label_c.setText('\u4e3b\u7a74') # 主穴
-        self.ui.label_d.setText('\u914d\u7a74') # 配穴
         gua_wei = infos['output']['FeiTeng8']['GuaWei']
+        self.ui.label_FeiTeng1.setText(str(gua_wei))
+
         hexagram = infos['output']['FeiTeng8']['Hexagram']
-        zhu_xue = infos['output']['FeiTeng8']['ZhuXue']
-        pei_xue = infos['output']['FeiTeng8']['PeiXue']
-        self.ui.label_digit.setText(str(gua_wei))
-        self.ui.label_hexgram.setText(f'{hexagram}{hexagram_map[hexagram]}')
-        self.ui.label_ZhuXue.setText(zhu_xue)
-        self.ui.label_PeiXue.setText(pei_xue)
+        str_hexagram = f'{hexagram}{hexagram_map[hexagram]}' if hexagram in hexagram_map else hexagram
+        self.ui.label_FeiTeng2.setText(str_hexagram)
+
+        self.ui.label_FeiTeng3.setText(infos['output']['FeiTeng8']['ZhuXue'])
+        self.ui.label_FeiTeng4.setText(infos['output']['FeiTeng8']['PeiXue'])
 
     def gan_zhi_from_infos(self):
         return infos['output']['date_gan'], infos['output']['date_zhi'], infos['output']['hour_gan'], infos['output']['hour_zhi']
