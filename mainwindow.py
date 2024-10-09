@@ -61,6 +61,12 @@ infos = {
             'BenXue': '~',
             'YuanXue': '~'
             },
+        'NaJia': {
+            'ZhuXue': '~',
+            'YuanXue': '~',
+            'TodayHuYongXue': '~',
+            'AdditionalXue': '~'
+            }
         }
     }
 
@@ -184,9 +190,13 @@ class MainWindow(QMainWindow):
         hour_idx = self.calculator.get_gan_zhi_index(hour_gan, hour_zhi)
         infos['output']['hour_idx'] = hour_idx
 
+        self.ui.label_date_gan_zhi.setText(f'{date_gan}{date_zhi}日 {date_idx}')
+        self.ui.label_hour_gan_zhi.setText(f'{hour_gan}{hour_zhi}时 {hour_idx}')
+
         self.update_LingGui8()
         self.update_FeiTeng8()
         self.update_NaZi()
+        self.update_NaJia()
 
         if self.ui.radioButton_FeiTeng8.isChecked():
             self.retranslate_FeiTeng8()
@@ -201,8 +211,6 @@ class MainWindow(QMainWindow):
 
 
         logger.info(infos)
-        self.ui.label_date_gan_zhi.setText(f'{date_gan}{date_zhi}日 {date_idx}')
-        self.ui.label_hour_gan_zhi.setText(f'{hour_gan}{hour_zhi}时 {hour_idx}')
 
 
     def update_LingGui8(self):
@@ -236,6 +244,14 @@ class MainWindow(QMainWindow):
         infos['output']['NaZi']['BenXue'] = ben_xue
         infos['output']['NaZi']['YuanXue'] = yuan_xue
 
+    def update_NaJia(self):
+        zhu_xue, yuan_xue, hu_yong_xue, bu_chong_xue = self.calculator.calc_NaJia(*self.gan_zhi_from_infos())
+
+        infos['output']['NaJia']['ZhuXue'] = zhu_xue
+        infos['output']['NaJia']['YuanXue'] = yuan_xue
+        infos['output']['NaJia']['TodayHuYongXue'] = hu_yong_xue
+        infos['output']['NaJia']['AdditionalXue'] = bu_chong_xue
+
 
     @Slot()
     def retranslate_NaZi(self):
@@ -258,6 +274,10 @@ class MainWindow(QMainWindow):
         self.ui.label_b.setText('\u539f\u7a74') # 原穴
         self.ui.label_c.setText('\u4eca\u65e5\n\u4e92\u7528\u7a74') # 今日互用穴
         self.ui.label_d.setText('\u8865\u5145\n\u7a74\u4f4d')       # 补充穴位
+        self.ui.radioButton_a.setText(infos['output']['NaJia']['ZhuXue'])
+        self.ui.radioButton_b.setText(infos['output']['NaJia']['YuanXue'])
+        self.ui.radioButton_c.setText(infos['output']['NaJia']['TodayHuYongXue'])
+        self.ui.radioButton_d.setText(infos['output']['NaJia']['AdditionalXue'])
 
     @Slot()
     def retranslate_LingGui8(self):
@@ -270,7 +290,9 @@ class MainWindow(QMainWindow):
         zhu_xue = infos['output']['LingGui8']['ZhuXue']
         pei_xue = infos['output']['LingGui8']['PeiXue']
         self.ui.label_digit.setText(str(jiu_gong_shu))
-        self.ui.label_hexgram.setText(f'{hexagram}{hexagram_map[hexagram]}')
+
+        str_hexagram = f'{hexagram}{hexagram_map[hexagram]}' if hexagram in hexagram_map else hexagram
+        self.ui.label_hexgram.setText(str_hexagram)
         self.ui.label_ZhuXue.setText(zhu_xue)
         self.ui.label_PeiXue.setText(pei_xue)
 

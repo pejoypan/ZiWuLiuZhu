@@ -69,7 +69,7 @@ class Calculator():
             2: ['坤', '照海', '列缺'],
             3: ['震', '外关', '足临泣'],
             4: ['巽', '足临泣', '外关'],
-            5: ['坤', '照海', '列缺'],
+            5: ['', '照海', '列缺'],
             6: ['乾', '公孙', '内关'],
             7: ['兑', '后溪', '申脉'],
             8: ['艮', '内关', '公孙'],
@@ -113,7 +113,10 @@ class Calculator():
         self.base_date = date(1940, 9, 18) # 甲子日
 
         self.NaZi_lut = pd.read_csv('csv/NaZi.csv', encoding='UTF-8')
-        logger.info(self.NaZi_lut)
+        # logger.info(self.NaZi_lut)
+
+        self.NaJia_df = pd.read_csv('csv/NaJia.csv', encoding='UTF-8')
+
 
 
 
@@ -197,3 +200,11 @@ class Calculator():
         row = self.NaZi_lut[self.NaZi_lut.iloc[:, 0] == hour_zhi]
 
         return row.iloc[0, 1], row.iloc[0, 2], row.iloc[0, 3], row.iloc[0, 4], row.iloc[0, 5], row.iloc[0, 6]
+
+    def calc_NaJia(self, day_gan, day_zhi, hour_gan, hour_zhi):
+        day_gan_zhi = day_gan + day_zhi
+        hour_gan_zhi = hour_gan + hour_zhi
+
+        row = self.NaJia_df[(self.NaJia_df.iloc[:, 0] == day_gan_zhi) & (self.NaJia_df.iloc[:, 1] == hour_gan_zhi)]
+
+        return row.iloc[0, 3], row.iloc[0, 4], row.iloc[0, 5], row.iloc[0, 6]
