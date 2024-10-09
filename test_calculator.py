@@ -126,5 +126,45 @@ class TestCalculator(unittest.TestCase):
         expected_4 = '子'
         self.assertEqual(self.calculator.get_hour_di_zhi(time_4), expected_4)
 
+    def test_calc_LingGui8(self):
+        # 测试各种输入组合
+        day_gan = '癸'
+        day_zhi = '卯'
+        hour_gan = '壬'
+        hour_zhi = '戌'
+        expected_result = (2, '坤', '照海', '列缺')
+        self.assertEqual(self.calculator.calc_LingGui8(day_gan, day_zhi, hour_gan, hour_zhi), expected_result)
+
+        day_gan = '乙'
+        day_zhi = '巳'
+        hour_gan = '丙'
+        hour_zhi = '戌'
+        expected_result = (4, '巽', '足临泣', '外关')
+        self.assertEqual(self.calculator.calc_LingGui8(day_gan, day_zhi, hour_gan, hour_zhi), expected_result)
+
+    def test_get_gan_zhi_index(self):
+        # 测试甲和子的索引
+        self.assertEqual(self.calculator.get_gan_zhi_index('甲', '子'), 1)
+
+        # 测试乙和丑的索引
+        self.assertEqual(self.calculator.get_gan_zhi_index('乙', '丑'), 2)
+
+        # 测试丙和寅的索引
+        self.assertEqual(self.calculator.get_gan_zhi_index('丙', '寅'), 3)
+
+        # 测试丁和卯的索引
+        self.assertEqual(self.calculator.get_gan_zhi_index('丁', '卯'), 4)
+
+        # 测试戊和辰的索引
+        self.assertEqual(self.calculator.get_gan_zhi_index('戊', '辰'), 5)
+
+        # 测试其他天干和地支的索引
+        self.assertEqual(self.calculator.get_gan_zhi_index('癸', '酉'), 10)
+        self.assertEqual(self.calculator.get_gan_zhi_index('丁', '亥'), 24)
+        self.assertEqual(self.calculator.get_gan_zhi_index('甲', '午'), 31)
+        self.assertEqual(self.calculator.get_gan_zhi_index('辛', '丑'), 38)
+        self.assertEqual(self.calculator.get_gan_zhi_index('辛', '亥'), 48)
+        self.assertEqual(self.calculator.get_gan_zhi_index('癸', '亥'), 60)
+
 if __name__ == '__main__':
     unittest.main()

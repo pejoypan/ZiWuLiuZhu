@@ -36,6 +36,76 @@ class Calculator():
             '亥': 7
         }
 
+        self.hour_tian_gan_lut = {
+            '甲': 9,
+            '己': 9,
+            '乙': 8,
+            '庚': 8,
+            '丙': 7,
+            '辛': 7,
+            '丁': 6,
+            '壬': 6,
+            '戊': 5,
+            '癸': 5
+        }
+
+        self.hour_di_zhi_lut = {
+            '子': 9,
+            '午': 9,
+            '丑': 8,
+            '未': 8,
+            '寅': 7,            
+            '申': 7,
+            '卯': 6,           
+            '酉': 6,
+            '辰': 5,
+            '戌': 5,
+            '巳': 4,
+            '亥': 4
+        }
+
+        self.LingGui8_lut = {
+            1: ['坎', '申脉', '后溪'],
+            2: ['坤', '照海', '列缺'],
+            3: ['震', '外关', '足临泣'],
+            4: ['巽', '足临泣', '外关'],
+            5: ['坤', '照海', '列缺'],
+            6: ['乾', '公孙', '内关'],
+            7: ['兑', '后溪', '申脉'],
+            8: ['艮', '内关', '公孙'],
+            9: ['离', '列缺', '照海']
+        }
+
+        self.FeiTeng8_lut = {
+            '甲': [1, '乾', '公孙', '内关'],
+            '乙': [8, '坤', '申脉', '后溪'],
+            '丙': [7, '艮', '内关', '公孙'],
+            '丁': [2, '兑', '照海', '列缺'],
+            '戊': [6, '坎', '临泣', '外关'],
+            '己': [3, '离', '列缺', '照海'],
+            '庚': [4, '震', '外关', '临泣'],
+            '辛': [5, '巽', '后溪', '申脉'],
+            '壬': [1, '乾', '公孙', '内关'],
+            '癸': [8, '坤', '申脉', '后溪']
+        }
+
+        self.gan_zhi_index_lut = [
+            #甲 乙 丙  丁 戊  己 庚  辛 壬  癸 
+            [1, 0, 13, 0, 25, 0, 37, 0, 49, 0], # 子
+            [0, 2, 0, 14, 0, 26, 0, 38, 0, 50], # 丑
+            [51, 0, 3, 0, 15, 0, 27, 0, 39, 0], # 寅
+            [0, 52, 0, 4, 0, 16, 0, 28, 0, 40], # 卯
+            [41, 0, 53, 0, 5, 0, 17, 0, 29, 0], # 辰
+            [0, 42, 0, 54, 0, 6, 0, 18, 0, 30], # 巳
+            [31, 0, 43, 0, 55, 0, 7, 0, 19, 0], # 午
+            [0, 32, 0, 44, 0, 56, 0, 8, 0, 20], # 未
+            [21, 0, 33, 0, 45, 0, 57, 0, 9, 0], # 申
+            [0, 22, 0, 34, 0, 46, 0, 58, 0, 10], # 酉
+            [11, 0, 23, 0, 35, 0, 47, 0, 59, 0], # 戌
+            [0, 12, 0, 24, 0, 36, 0, 48, 0, 60] # 亥
+        ]
+
+
         self.list_tian_gan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸']
 
         self.list_di_zhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥']
@@ -84,3 +154,35 @@ class Calculator():
         hour_zhi = self.get_hour_di_zhi(input_time)
 
         return date_gan, date_zhi, hour_gan, hour_zhi
+    
+    def get_gan_zhi_index(self, gan, zhi):
+        gan_idx = self.list_tian_gan.index(gan)
+        zhi_idx = self.list_di_zhi.index(zhi)
+
+        return self.gan_zhi_index_lut[zhi_idx][gan_idx]
+
+
+
+    def calc_LingGui8(self, day_gan, day_zhi, hour_gan, hour_zhi):
+        day_gan_value = self.day_tian_gan_lut[day_gan]
+        day_zhi_value = self.day_di_zhi_lut[day_zhi]
+
+        hour_gan_value = self.hour_tian_gan_lut[hour_gan]
+        hour_zhi_value = self.hour_di_zhi_lut[hour_zhi]
+
+        # calculate algebra sum
+        total_value = day_gan_value + day_zhi_value + hour_gan_value + hour_zhi_value
+
+        # calculate divisor
+        day_gan_idx = self.list_tian_gan.index(day_gan)
+        divisor = 9 if (day_gan_idx % 2) == 0 else 6
+
+        jiu_gong_shu = total_value % divisor
+        jiu_gong_shu = jiu_gong_shu if jiu_gong_shu != 0 else divisor
+
+
+        return jiu_gong_shu, self.LingGui8_lut[jiu_gong_shu][0], self.LingGui8_lut[jiu_gong_shu][1], self.LingGui8_lut[jiu_gong_shu][2]
+    
+    def calc_FeiTeng8(self, hour_gan):
+
+        return self.FeiTeng8_lut[hour_gan][0], self.FeiTeng8_lut[hour_gan][1], self.FeiTeng8_lut[hour_gan][2], self.FeiTeng8_lut[hour_gan][3]
