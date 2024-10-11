@@ -21,6 +21,7 @@ hexagram_map = {
 
 infos = {
     'name': '~', 
+    'gender': '~',
     'date': {
         'year': 1900,
         'month': 1,
@@ -87,16 +88,20 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.num_NaJia = 4
+
         self.ui.program_choices = QButtonGroup()
         self.build_button_group()
 
+        self.ui.label_NaJia_.hide()
         self.ui.Slider_NaJia.hide()
         self.ui.Slider_NaZi.hide()
 
         self.ui.dateEdit.setDate(current_date)
         self.ui.timeEdit.setTime(current_time)
 
-        infos['name'] = self.ui.lineEdit.text()
+        # infos['name'] = self.ui.lineEdit.text()
+        infos['gender'] = self.ui.comboBox_gender.currentText()
 
         infos['date']['year'] = self.ui.dateEdit.date().year()
         infos['date']['month'] = self.ui.dateEdit.date().month()
@@ -113,7 +118,8 @@ class MainWindow(QMainWindow):
         self.create_connect()
     
     def create_connect(self):
-        self.ui.lineEdit.editingFinished.connect(self.on_input_name)
+        # self.ui.lineEdit.editingFinished.connect(self.on_input_name)
+        self.ui.comboBox_gender.activated.connect(self.on_select_gender)
         self.ui.dateEdit.userDateChanged.connect(self.on_input_date)
         self.ui.timeEdit.userTimeChanged.connect(self.on_input_time)
 
@@ -144,9 +150,13 @@ class MainWindow(QMainWindow):
         logger.info(infos)
 
         
+    # @Slot()
+    # def on_input_name(self):
+    #     infos['name'] = self.ui.lineEdit.text()
+    
     @Slot()
-    def on_input_name(self):
-        infos['name'] = self.ui.lineEdit.text()
+    def on_select_gender(self):
+        infos['gender'] = self.ui.comboBox_gender.currentText()
 
     @Slot()
     def on_input_date(self):
@@ -183,9 +193,21 @@ class MainWindow(QMainWindow):
             self.remove_label_highlight()
             self.ui.label_NaJia1.setStyleSheet("color: red;")
         elif 25 <= value < 50:
-            infos['acupoint'] = self.ui.label_NaJia2.text()
-            self.remove_label_highlight()
-            self.ui.label_NaJia2.setStyleSheet("color: red;")
+            if self.num_NaJia == 4:
+                infos['acupoint'] = self.ui.label_NaJia2.text()
+                self.remove_label_highlight()
+                self.ui.label_NaJia2.setStyleSheet("color: red;")
+            elif self.num_NaJia == 5:
+                if value < 38:
+                    infos['acupoint'] = self.ui.label_NaJia2.text()
+                    self.remove_label_highlight()
+                    self.ui.label_NaJia2.setStyleSheet("color: red;")
+                else:
+                    infos['acupoint'] = self.ui.label_NaJia_.text()
+                    self.remove_label_highlight()
+                    self.ui.label_NaJia_.setStyleSheet("color: red;")
+            else:
+                pass
         elif 50 <= value < 75:
             infos['acupoint'] = self.ui.label_NaJia3.text()
             self.remove_label_highlight()
@@ -231,6 +253,7 @@ class MainWindow(QMainWindow):
         self.ui.label_NaJia2.setStyleSheet("")
         self.ui.label_NaJia3.setStyleSheet("")
         self.ui.label_NaJia4.setStyleSheet("")
+        self.ui.label_NaJia_.setStyleSheet("")
         self.ui.label_NaZi1.setStyleSheet("")
         self.ui.label_NaZi2.setStyleSheet("")
         self.ui.label_NaZi3.setStyleSheet("")
@@ -328,6 +351,9 @@ class MainWindow(QMainWindow):
     def update_NaJia(self):
         zhu_xue, yuan_xue, hu_yong_xue, bu_chong_xue = self.calculator.calc_NaJia(*self.gan_zhi_from_infos())
 
+        if '|' in yuan_xue:
+            yuan_xue = yuan_xue.split('|')
+
         infos['output']['NaJia']['ZhuXue'] = zhu_xue
         infos['output']['NaJia']['YuanXue'] = yuan_xue
         infos['output']['NaJia']['TodayHuYongXue'] = hu_yong_xue
@@ -344,7 +370,17 @@ class MainWindow(QMainWindow):
 
     def retranslate_NaJia(self):
         self.ui.label_NaJia1.setText(infos['output']['NaJia']['ZhuXue'])
-        self.ui.label_NaJia2.setText(infos['output']['NaJia']['YuanXue'])
+        if (isinstance(infos['output']['NaJia']['YuanXue'], str)):
+            self.ui.label_NaJia_.hide()
+            self.num_NaJia = 4
+            self.ui.label_NaJia2.setText(infos['output']['NaJia']['YuanXue'])
+        elif (isinstance(infos['output']['NaJia']['YuanXue'], list)):
+            self.ui.label_NaJia_.show()
+            self.num_NaJia = 5
+            self.ui.label_NaJia2.setText(infos['output']['NaJia']['YuanXue'][0])
+            self.ui.label_NaJia_.setText(infos['output']['NaJia']['YuanXue'][1])
+
+        # self.ui.label_NaJia2.setText(infos['output']['NaJia']['YuanXue'])
         self.ui.label_NaJia3.setText(infos['output']['NaJia']['TodayHuYongXue'])
         self.ui.label_NaJia4.setText(infos['output']['NaJia']['AdditionalXue'])
 

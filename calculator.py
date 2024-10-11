@@ -1,6 +1,10 @@
+from PySide6.QtCore import QFile, QTextStream
 import pandas as pd
 import logging
+import io
 from datetime import date
+
+import csv_rc
 
 logger = logging.getLogger('CALC')
 logger.addHandler(logging.StreamHandler())
@@ -112,10 +116,13 @@ class Calculator():
 
         self.base_date = date(1940, 9, 18) # 甲子日
 
-        self.NaZi_lut = pd.read_csv('csv/NaZi.csv', encoding='UTF-8')
+        self.NaZi_lut = self.read_csv_from_qrc(":/csv/NaZi.csv")
+        self.NaJia_df = self.read_csv_from_qrc(":/csv/NaJia.csv")
+
+        # self.NaZi_lut = pd.read_csv('csv/NaZi.csv', encoding='UTF-8')
         # logger.info(self.NaZi_lut)
 
-        self.NaJia_df = pd.read_csv('csv/NaJia.csv', encoding='UTF-8')
+        # self.NaJia_df = pd.read_csv('csv/NaJia.csv', encoding='UTF-8')
 
 
 
@@ -208,3 +215,30 @@ class Calculator():
         row = self.NaJia_df[(self.NaJia_df.iloc[:, 0] == day_gan_zhi) & (self.NaJia_df.iloc[:, 1] == hour_gan_zhi)]
 
         return row.iloc[0, 3], row.iloc[0, 4], row.iloc[0, 5], row.iloc[0, 6]
+
+    def read_csv_from_qrc(self, resource_path: str) -> pd.DataFrame:
+        """
+        从 Qt 资源文件 (.qrc) 中读取 CSV 文件，并返回 pandas DataFrame。
+
+        参数:
+            resource_path (str): 资源文件的路径 (例如 `:/resources/my_data.csv`)
+
+        返回:
+            pd.DataFrame: 包含 CSV 数据的 DataFrame
+        """
+        # 打开资源文件
+        qfile = QFile(resource_path)
+        
+        if not qfile.open(QFile.ReadOnly | QFile.Text):
+            raise FileNotFoundError(f"Unable to open: {resource_path}")
+        
+        # 读取文件内容
+        stream = QTextStream(qfile)
+        csv_data = stream.readAll()  # 读取所有内容为字符串
+        qfile.close()
+
+        # 将 CSV 数据转换为类似文件对象的流
+        csv_io = io.StringIO(csv_data)
+
+        # 使用 pandas 读取 CSV 数据
+        return pd.read_csv(csv_io, encoding='UTF-8')
