@@ -214,7 +214,7 @@ class Calculator():
 
         row = self.NaJia_df[(self.NaJia_df.iloc[:, 0] == day_gan_zhi) & (self.NaJia_df.iloc[:, 1] == hour_gan_zhi)]
 
-        return row.iloc[0, 3], row.iloc[0, 4], row.iloc[0, 5], row.iloc[0, 6]
+        return row.iloc[0, 3], row.iloc[0, 4], row.iloc[0, 5], row.iloc[0, 6], row.iloc[0, 7]
 
     def read_csv_from_qrc(self, resource_path: str) -> pd.DataFrame:
         """

@@ -67,7 +67,8 @@ infos = {
             'ZhuXue': '~',
             'YuanXue': '~',
             'TodayHuYongXue': '~',
-            'AdditionalXue': '~'
+            'AdditionalXue': '~',
+            'SpatialXue': []
             }
         }
     }
@@ -153,7 +154,8 @@ class MainWindow(QMainWindow):
         logger.info(infos)
         if infos['program'] == '纳甲法':
             self.najia_page.show()
-            self.najia_page.set_text_to_model(0, 0, infos['acupoint'])
+            for col, spatial_xue in enumerate(infos['output']['NaJia']['SpatialXue']):
+                self.najia_page.set_text_to_model(0, col, spatial_xue)
         else:
             pass
 
@@ -357,7 +359,7 @@ class MainWindow(QMainWindow):
         infos['output']['NaZi']['YuanXue'] = yuan_xue
 
     def update_NaJia(self):
-        zhu_xue, yuan_xue, hu_yong_xue, bu_chong_xue = self.calculator.calc_NaJia(*self.gan_zhi_from_infos())
+        zhu_xue, yuan_xue, hu_yong_xue, bu_chong_xue, kong_jian_xue = self.calculator.calc_NaJia(*self.gan_zhi_from_infos())
 
         if '|' in yuan_xue:
             yuan_xue = yuan_xue.split('|')
@@ -366,6 +368,9 @@ class MainWindow(QMainWindow):
         infos['output']['NaJia']['YuanXue'] = yuan_xue
         infos['output']['NaJia']['TodayHuYongXue'] = hu_yong_xue
         infos['output']['NaJia']['AdditionalXue'] = bu_chong_xue
+
+        kong_jian_list = kong_jian_xue.split('|')
+        infos['output']['NaJia']['SpatialXue'] = kong_jian_list
 
 
     def retranslate_NaZi(self):
