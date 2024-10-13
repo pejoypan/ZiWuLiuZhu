@@ -7,3 +7,4 @@ mainwindow.spec
 ui_mainwindow.py
 icons_rc.py
 csv_rc.py
+ui_page_NaJia.py

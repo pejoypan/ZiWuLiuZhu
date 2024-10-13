@@ -6,6 +6,7 @@ import yaml
 import logging
 from datetime import datetime
 from calculator import Calculator
+from page import NaJiaPage
 
 hexagram_map = {
     '乾': '\u2630',
@@ -88,6 +89,8 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.najia_page = NaJiaPage()
+
         self.num_NaJia = 4
 
         self.ui.program_choices = QButtonGroup()
@@ -148,6 +151,11 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_generate(self):
         logger.info(infos)
+        if infos['program'] == '纳甲法':
+            self.najia_page.show()
+            self.najia_page.set_text_to_model(0, 0, infos['acupoint'])
+        else:
+            pass
 
         
     # @Slot()
