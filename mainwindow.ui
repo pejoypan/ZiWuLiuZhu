@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="icons.qrc">
-    <normaloff>:/icon/hexagram.svg</normaloff>:/icon/hexagram.svg</iconset>
+    <normaloff>:/icon/hexagram.jpg</normaloff>:/icon/hexagram.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
