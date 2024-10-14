@@ -206,7 +206,7 @@ class Calculator():
 
         row = self.NaZi_lut[self.NaZi_lut.iloc[:, 0] == hour_zhi]
 
-        return row.iloc[0, 1], row.iloc[0, 2], row.iloc[0, 3], row.iloc[0, 4], row.iloc[0, 5], row.iloc[0, 6]
+        return row.iloc[0, 1], row.iloc[0, 2], row.iloc[0, 3], row.iloc[0, 4], row.iloc[0, 5], row.iloc[0, 6], row.iloc[0, 7], row.iloc[0, 8]
 
     def calc_NaJia(self, day_gan, day_zhi, hour_gan, hour_zhi):
         day_gan_zhi = day_gan + day_zhi

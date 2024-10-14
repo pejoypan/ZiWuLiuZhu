@@ -6,7 +6,8 @@ import yaml
 import logging
 from datetime import datetime
 from calculator import Calculator
-from page import NaJiaPage
+from infos import infos
+from page import NaJiaPage, NaZiPage
 
 hexagram_map = {
     '乾': '\u2630',
@@ -20,58 +21,6 @@ hexagram_map = {
 }
 
 
-infos = {
-    'name': '~', 
-    'gender': '~',
-    'date': {
-        'year': 1900,
-        'month': 1,
-        'day': 1
-        },
-    'time': {
-        'hour': 0,
-        'minute': 0
-        },
-    'program': '~',
-    'order': '~',
-    'type': '~',
-    'acupoint': '~',
-    'output': {
-        'date_gan': '~',
-        'date_zhi': '~',
-        'date_idx': 0,
-        'hour_gan': '~',
-        'hour_zhi': '~',
-        'hour_idx': 0,
-        'LingGui8': {
-            'JiuGongShu' : 0,
-            'Hexagram': '~',
-            'ZhuXue': '~',
-            'PeiXue': '~'
-            },
-        'FeiTeng8': {
-            'GuaWei' : 0,
-            'Hexagram': '~',
-            'ZhuXue': '~',
-            'PeiXue': '~'
-            },
-        'NaZi': {
-            'Bu1': '~',
-            'Bu2': '~',
-            'Bu3': '~',
-            'XieXue': '~',
-            'BenXue': '~',
-            'YuanXue': '~'
-            },
-        'NaJia': {
-            'ZhuXue': '~',
-            'YuanXue': '~',
-            'TodayHuYongXue': '~',
-            'AdditionalXue': '~',
-            'SpatialXue': []
-            }
-        }
-    }
 
 current_date = QDate.currentDate()
 current_time = QTime.currentTime()
@@ -91,6 +40,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.najia_page = NaJiaPage()
+        self.nazi_page = NaZiPage()
 
         self.num_NaJia = 4
 
@@ -153,9 +103,12 @@ class MainWindow(QMainWindow):
     def on_generate(self):
         logger.info(infos)
         if infos['program'] == '纳甲法':
+            self.najia_page.update_model()
             self.najia_page.show()
-            for col, spatial_xue in enumerate(infos['output']['NaJia']['SpatialXue']):
-                self.najia_page.set_text_to_model(0, col, spatial_xue)
+        elif infos['program'] == '纳子法':
+            self.nazi_page.update_model()
+            self.nazi_page.show()
+
         else:
             pass
 
@@ -349,7 +302,7 @@ class MainWindow(QMainWindow):
     def update_NaZi(self):
         hour_zhi = infos['output']['hour_zhi']
 
-        bu1, bu2, bu3, xie_xue, ben_xue, yuan_xue = self.calculator.calc_NaZi(hour_zhi)
+        bu1, bu2, bu3, xie_xue, ben_xue, yuan_xue, xiao_tong, da_tong = self.calculator.calc_NaZi(hour_zhi)
 
         infos['output']['NaZi']['Bu1'] = bu1
         infos['output']['NaZi']['Bu2'] = bu2
@@ -357,6 +310,13 @@ class MainWindow(QMainWindow):
         infos['output']['NaZi']['XieXue'] = xie_xue
         infos['output']['NaZi']['BenXue'] = ben_xue
         infos['output']['NaZi']['YuanXue'] = yuan_xue
+
+        xiao_tong_list = xiao_tong.split('|')
+        infos['output']['NaZi']['XiaoTongJing'] = xiao_tong_list
+
+        da_tong_list = da_tong.split('|')
+        infos['output']['NaZi']['DaTongJing'] = da_tong_list
+
 
     def update_NaJia(self):
         zhu_xue, yuan_xue, hu_yong_xue, bu_chong_xue, kong_jian_xue = self.calculator.calc_NaJia(*self.gan_zhi_from_infos())
