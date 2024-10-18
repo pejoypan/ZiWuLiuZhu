@@ -7,7 +7,7 @@ import logging
 from datetime import datetime
 from calculator import Calculator
 from infos import infos
-from page import NaJiaPage, NaZiPage
+from page import NaJiaPage, NaZiPage, LingGui8Page
 
 hexagram_map = {
     '乾': '\u2630',
@@ -41,6 +41,7 @@ class MainWindow(QMainWindow):
 
         self.najia_page = NaJiaPage()
         self.nazi_page = NaZiPage()
+        self.linggui8_page = LingGui8Page()
 
         self.num_NaJia = 4
 
@@ -108,7 +109,9 @@ class MainWindow(QMainWindow):
         elif infos['program'] == '纳子法':
             self.nazi_page.update_model()
             self.nazi_page.show()
-
+        elif infos['program'] == '灵龟八法':
+            self.linggui8_page.update_model()
+            self.linggui8_page.show()
         else:
             pass
 

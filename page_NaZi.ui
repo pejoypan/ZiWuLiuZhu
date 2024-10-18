@@ -60,7 +60,7 @@
       <widget class="QRadioButton" name="radioButton">
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>14</pointsize>
         </font>
        </property>
        <property name="text">
@@ -75,7 +75,7 @@
       <widget class="QRadioButton" name="radioButton_2">
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>14</pointsize>
         </font>
        </property>
        <property name="text">
@@ -101,14 +101,14 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>14</pointsize>
+       <pointsize>12</pointsize>
       </font>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>77</number>
+      <number>61</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
       <number>40</number>

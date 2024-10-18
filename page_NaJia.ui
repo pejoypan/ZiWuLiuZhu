@@ -57,14 +57,14 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>14</pointsize>
+       <pointsize>12</pointsize>
       </font>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>77</number>
+      <number>61</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
       <number>40</number>
