@@ -12,7 +12,7 @@ pyside6-designer
 pyside6-uic mainwindow.ui -o ui_mainwindow.py
 pyside6-uic page_NaJia.ui -o ui_page_NaJia.py
 pyside6-uic page_NaZi.ui -o ui_page_NaZi.py
-pyside6-uic page_LingGui8.ui -o ui_page_LingGui8.py
+pyside6-uic page.ui -o ui_page.py
 ```
 
 # Generate Resource
