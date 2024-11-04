@@ -113,9 +113,11 @@ class MainWindow(QMainWindow):
         elif infos['program'] == '灵龟八法':
             self.linggui8_page.update_model()
             self.linggui8_page.show()
+            self.linggui8_page.output_page.ui.verticalLayout.replaceWidget(self.linggui8_page.output_page.ui.widget, self.ui.gridWidget_4)
         elif infos['program'] == '飞腾八法':
             self.feiteng_page.update_model()
             self.feiteng_page.show()
+            self.feiteng_page.output_page.ui.verticalLayout.replaceWidget(self.feiteng_page.output_page.ui.widget, self.ui.gridWidget_4)
         else:
             pass
 
@@ -393,8 +395,8 @@ def initialize():
     pass
 
 if __name__ == "__main__":
-    log_file_name = f'{current_date.toPython()}-{current_time.hour()}{current_time.minute()}{current_time.second()}.log'
-    logging.basicConfig(filename = log_file_name, filemode = 'w', level = logging.DEBUG)
+    # log_file_name = f'{current_date.toPython()}-{current_time.hour()}{current_time.minute()}{current_time.second()}.log'
+    # logging.basicConfig(filename = log_file_name, filemode = 'w', level = logging.DEBUG)
     logger = logging.getLogger('@')
     logger.addHandler(logging.StreamHandler())
 
