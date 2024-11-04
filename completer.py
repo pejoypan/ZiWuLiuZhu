@@ -3,9 +3,12 @@ from PySide6.QtCore import Qt
 
 
 class CompleterDelegate(QStyledItemDelegate):
-    def __init__(self, parent=None):
+    def __init__(self, words=None, parent=None):
         super(CompleterDelegate, self).__init__(parent)
-        self.completer_words = ["大椎", "至阳", "命门", "大杼", "肺兪", "肾兪", "百会", "神庭", "印堂", "头维", "攒竹", "迎香", "水分", "气海", "关元", "期门", "气穴", "足三里"]
+        if words is None:
+            self.completer_words = ["大椎", "至阳", "命门", "大杼", "肺兪", "肾兪", "百会", "神庭", "印堂", "头维", "攒竹", "迎香", "水分", "气海", "关元", "期门", "气穴", "足三里"]
+        else:
+            self.completer_words = words
 
     def createEditor(self, parent, option, index):
         # 创建 QLineEdit 作为编辑器
