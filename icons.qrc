@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icon">
     <file>hexagram.jpg</file>
+    <file>icons/feiteng_background.png</file>
+    <file>icons/correct.png</file>
   </qresource>
 </RCC>
