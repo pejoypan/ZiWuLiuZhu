@@ -13,6 +13,8 @@ pyside6-uic mainwindow.ui -o ui_mainwindow.py
 pyside6-uic page_NaJia.ui -o ui_page_NaJia.py
 pyside6-uic page_NaZi.ui -o ui_page_NaZi.py
 pyside6-uic page.ui -o ui_page.py
+pyside6-uic output.ui -o ui_output.py
+pyside6-uic feiteng_linggui_display.ui -o ui_feiteng_linggui_display.py
 ```
 
 # Generate Resource
