@@ -6,6 +6,7 @@ from ui_page import Ui_ItemForm
 
 from ui_feiteng_linggui_display import Ui_feiteng_linggui_display
 from feiteng_display import FeiTengDisplay
+from linggui_display import LingGuiDisplay
 from output import OutputPage
 
 from PySide6.QtWidgets import QApplication, QWidget, QHeaderView, QTableWidgetItem
@@ -18,84 +19,29 @@ from completer import CompleterDelegate
 header_style = "font: 700 14pt;"
 
 class DisplayWidget(QWidget):
-    def __init__(self):
+    def __init__(self, is_FT=True):
         super(DisplayWidget, self).__init__()
         self.ui = Ui_feiteng_linggui_display()
         self.ui.setupUi(self)
-        self.neck_back_widget = FeiTengDisplay()
+
+        self.neck_back_widget = FeiTengDisplay() if is_FT else LingGuiDisplay()
         self.ui.verticalLayout.replaceWidget(self.ui.widget, self.neck_back_widget)
-        self.head_hand_widget = FeiTengDisplay(left_first=False)
+
+        self.head_hand_widget = FeiTengDisplay(left_first=False) if is_FT else LingGuiDisplay(left_first=False)
         self.ui.verticalLayout_2.replaceWidget(self.ui.widget_2, self.head_hand_widget)
-        self.stomach_widget = FeiTengDisplay(left_first=False)
+
+        self.stomach_widget = FeiTengDisplay(left_first=False) if is_FT else LingGuiDisplay(left_first=False)
         self.ui.verticalLayout_3.replaceWidget(self.ui.widget_3, self.stomach_widget)
         # self.ui.widget_2 = SingleWidget()
         # self.ui.widget_3 = SingleWidget()
 
     def set_from_table(self, table):
-        if table.item(1, 1) is not None:
-            self.neck_back_widget.label_1.setText(table.item(1, 1).text())
-        
-        if table.item(2, 1) is not None:
-            self.neck_back_widget.label_8.setText(table.item(2, 1).text())
 
-        if table.item(3, 1) is not None:
-            back_side1 = table.item(3, 1).text()
-            self.neck_back_widget.label_2.setText(back_side1)
-            self.neck_back_widget.label_5.setText(back_side1)
+        self.neck_back_widget.set_from_table(table, col_id=1)
 
-        if table.item(4, 1) is not None:
-            back_side2 = table.item(4, 1).text()
-            self.neck_back_widget.label_3.setText(back_side2)
-            self.neck_back_widget.label_6.setText(back_side2)
-        
-        if table.item(5, 1) is not None:
-            back_side3 = table.item(5, 1).text()
-            self.neck_back_widget.label_4.setText(back_side3)
-            self.neck_back_widget.label_7.setText(back_side3)
+        self.head_hand_widget.set_from_table(table, col_id=2)
 
-
-        if table.item(1, 2) is not None:
-            self.head_hand_widget.label_1.setText(table.item(1, 2).text())
-        
-        if table.item(2, 2) is not None:
-            self.head_hand_widget.label_8.setText(table.item(2, 2).text())
-
-        if table.item(3, 2) is not None:
-            head_side1 = table.item(3, 2).text()
-            self.head_hand_widget.label_2.setText(head_side1)
-            self.head_hand_widget.label_5.setText(head_side1)
-
-        if table.item(4, 2) is not None:
-            head_side2 = table.item(4, 2).text()
-            self.head_hand_widget.label_3.setText(head_side2)
-            self.head_hand_widget.label_6.setText(head_side2)
-
-        if table.item(5, 2) is not None:
-            head_side3 = table.item(5, 2).text()
-            self.head_hand_widget.label_4.setText(head_side3)
-            self.head_hand_widget.label_7.setText(head_side3)
-
-        
-        if table.item(1, 3) is not None:
-            self.stomach_widget.label_1.setText(table.item(1, 3).text())
-
-        if table.item(2, 3) is not None:
-            self.stomach_widget.label_8.setText(table.item(2, 3).text())
-        
-        if table.item(3, 3) is not None:
-            stomach_side1 = table.item(3, 3).text()
-            self.stomach_widget.label_2.setText(stomach_side1)
-            self.stomach_widget.label_5.setText(stomach_side1)
-        
-        if table.item(4, 3) is not None:
-            stomach_side2 = table.item(4, 3).text()
-            self.stomach_widget.label_3.setText(stomach_side2)
-            self.stomach_widget.label_6.setText(stomach_side2)
-        
-        if table.item(5, 3) is not None:
-            stomach_side3 = table.item(5, 3).text()
-            self.stomach_widget.label_4.setText(stomach_side3)
-            self.stomach_widget.label_7.setText(stomach_side3)
+        self.stomach_widget.set_from_table(table, col_id=3)
         
 
 class BasePage(QWidget):
@@ -133,7 +79,7 @@ class ItemBasePage(QWidget):
         self.ui = Ui_ItemForm()
         self.ui.setupUi(self)
 
-        self.display_widget = DisplayWidget()
+        # self.display_widget = DisplayWidget()
         self.output_page = OutputPage()
 
         # table
@@ -148,6 +94,7 @@ class ItemBasePage(QWidget):
 
         self.ui.table.setRowHeight(0, 50)
 
+        # TODO: delegate linggui / feiteng
         self.ui.table.setItemDelegateForRow(1, self.mid_delegate)
         self.ui.table.setItemDelegateForRow(2, self.mid_delegate)
         self.ui.table.setItemDelegateForRow(3, self.side_delegate)
@@ -191,8 +138,10 @@ class ItemBasePage(QWidget):
 
     @Slot()
     def on_click(self):
-        self.display_widget.set_from_table(self.ui.table)
-        self.output_page.ui.verticalLayout.replaceWidget(self.output_page.ui.widget_2, self.display_widget)
+        is_FT = infos['program'] == '飞腾八法'
+        display_widget = DisplayWidget(is_FT)
+        display_widget.set_from_table(self.ui.table)
+        self.output_page.ui.verticalLayout.replaceWidget(self.output_page.ui.widget_2, display_widget)
         list_experience = self.get_experience()
         self.output_page.set_experience(list_experience)
         self.output_page.show()

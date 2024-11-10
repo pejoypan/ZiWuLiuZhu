@@ -76,6 +76,25 @@ class FeiTengDisplay(QWidget):
         painter = QPainter(self)
         painter.drawPixmap(self.rect(), self.background)
 
+    def set_from_table(self, table, col_id):
+        if table.item(1, col_id) is not None:
+            self.label_1.setText(table.item(1, col_id).text())
+
+        if table.item(2, col_id) is not None:
+            self.label_8.setText(table.item(2, col_id).text())
+
+        if table.item(3, col_id) is not None:
+            self.label_2.setText(table.item(3, col_id).text())
+            self.label_5.setText(table.item(3, col_id).text())
+
+        if table.item(4, col_id) is not None:
+            self.label_3.setText(table.item(4, col_id).text())
+            self.label_6.setText(table.item(4, col_id).text())
+
+        if table.item(5, col_id) is not None:
+            self.label_4.setText(table.item(5, col_id).text())
+            self.label_7.setText(table.item(5, col_id).text())
+
 
 # import sys
 

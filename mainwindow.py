@@ -104,6 +104,7 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_generate(self):
         logger.info(infos)
+        self.hide()
         if infos['program'] == '纳甲法':
             self.najia_page.update_model()
             self.najia_page.show()
@@ -113,7 +114,7 @@ class MainWindow(QMainWindow):
         elif infos['program'] == '灵龟八法':
             self.linggui8_page.update_model()
             self.linggui8_page.show()
-            self.linggui8_page.output_page.ui.verticalLayout.replaceWidget(self.linggui8_page.output_page.ui.widget, self.ui.gridWidget_4)
+            self.linggui8_page.output_page.ui.verticalLayout.replaceWidget(self.linggui8_page.output_page.ui.widget, self.ui.gridWidget_2)
         elif infos['program'] == '飞腾八法':
             self.feiteng_page.update_model()
             self.feiteng_page.show()
