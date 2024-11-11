@@ -141,7 +141,7 @@ class ItemBasePage(QWidget):
         is_FT = infos['program'] == '飞腾八法'
         display_widget = DisplayWidget(is_FT)
         display_widget.set_from_table(self.ui.table)
-        self.output_page.ui.verticalLayout.replaceWidget(self.output_page.ui.widget_2, display_widget)
+        self.output_page.set_space_display(display_widget)
         list_experience = self.get_experience()
         self.output_page.set_experience(list_experience)
         self.output_page.show()

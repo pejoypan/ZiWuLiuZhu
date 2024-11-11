@@ -3,5 +3,7 @@
     <file>hexagram.jpg</file>
     <file>icons/feiteng_background.png</file>
     <file>icons/correct.png</file>
+    <file>icons/switch.png</file>
+    <file>icons/edit.png</file>
   </qresource>
 </RCC>

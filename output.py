@@ -3,6 +3,7 @@ from PySide6.QtGui import QPainter, QPageSize, QPixmap
 from PySide6.QtPrintSupport import QPrinter
 from PySide6.QtCore import Qt, Slot, QPoint
 from ui_output import Ui_OutputPage
+from feiteng_linggui_custom import FeiTengLingGuiCustom
 from infos import infos
 
 class OutputPage(QWidget):
@@ -13,6 +14,23 @@ class OutputPage(QWidget):
 
         self.ui.pushButton.clicked.connect(self.export_to_img)
 
+        self.ui.pushButton_custom.clicked.connect(self.on_click_custom)
+
+
+    def set_space_display(self, space_display):
+        self.space_display_auto = space_display
+        self.ui.stackedWidget.addWidget(self.space_display_auto)
+        self.ui.stackedWidget.setCurrentWidget(self.space_display_auto)
+        self.space_display_custom = FeiTengLingGuiCustom(infos['program'] == '飞腾八法')
+        self.ui.stackedWidget.addWidget(self.space_display_custom)
+
+    @Slot()
+    def on_click_custom(self):
+        if infos['program'] == '飞腾八法' or infos['program'] == '灵龟八法':
+            if self.ui.stackedWidget.currentWidget() == self.space_display_auto:
+                self.ui.stackedWidget.setCurrentWidget(self.space_display_custom)
+            else:
+                self.ui.stackedWidget.setCurrentWidget(self.space_display_auto)
 
     def set_experience(self, vec_point):
         ncols = self.ui.tableWidget.columnCount()
