@@ -345,7 +345,7 @@
           <widget class="QWidget" name="gridWidget" native="true">
            <layout class="QGridLayout" name="gridLayout_2">
             <item row="0" column="0">
-             <widget class="QLabel" name="label_8">
+             <widget class="QLabel" name="najia_title_1">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -376,7 +376,7 @@
              </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QLabel" name="label_12">
+             <widget class="QLabel" name="najia_title_4">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -392,7 +392,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLabel" name="label_10">
+             <widget class="QLabel" name="najia_title_2">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -439,7 +439,7 @@
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QLabel" name="label_11">
+             <widget class="QLabel" name="najia_title_3">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -521,7 +521,7 @@
              </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QLabel" name="label_28">
+             <widget class="QLabel" name="nazi_title_4">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -552,7 +552,7 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QLabel" name="label_40">
+             <widget class="QLabel" name="nazi_title_6">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -583,7 +583,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLabel" name="label_26">
+             <widget class="QLabel" name="nazi_title_2">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -599,7 +599,7 @@
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QLabel" name="label_24">
+             <widget class="QLabel" name="nazi_title_3">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -630,7 +630,7 @@
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QLabel" name="label_6">
+             <widget class="QLabel" name="nazi_title_5">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>
@@ -676,7 +676,7 @@
              </widget>
             </item>
             <item row="0" column="0">
-             <widget class="QLabel" name="label_27">
+             <widget class="QLabel" name="nazi_title_1">
               <property name="font">
                <font>
                 <pointsize>14</pointsize>

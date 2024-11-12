@@ -162,10 +162,12 @@ class MainWindow(QMainWindow):
     @Slot(int)
     def on_move_slider_NaJia(self, value):
         if 0 <= value < 25:
+            infos['acupoint_title'] = self.ui.najia_title_1.text()
             infos['acupoint'] = self.ui.label_NaJia1.text()
             self.remove_label_highlight()
             self.ui.label_NaJia1.setStyleSheet("color: red;")
         elif 25 <= value < 50:
+            infos['acupoint_title'] = self.ui.najia_title_2.text()
             if self.num_NaJia == 4:
                 infos['acupoint'] = self.ui.label_NaJia2.text()
                 self.remove_label_highlight()
@@ -182,10 +184,12 @@ class MainWindow(QMainWindow):
             else:
                 pass
         elif 50 <= value < 75:
+            infos['acupoint_title'] = self.ui.najia_title_3.text()
             infos['acupoint'] = self.ui.label_NaJia3.text()
             self.remove_label_highlight()
             self.ui.label_NaJia3.setStyleSheet("color: red;")
         elif 75 <= value <= 100:
+            infos['acupoint_title'] = self.ui.najia_title_4.text()
             infos['acupoint'] = self.ui.label_NaJia4.text()
             self.remove_label_highlight()
             self.ui.label_NaJia4.setStyleSheet("color: red;")
@@ -195,26 +199,32 @@ class MainWindow(QMainWindow):
     @Slot(int)
     def on_move_slider_NaZi(self, value):
         if 0 <= value < 17:
+            infos['acupoint_title'] = self.ui.nazi_title_1.text()
             infos['acupoint'] = self.ui.label_NaZi1.text()
             self.remove_label_highlight()
             self.ui.label_NaZi1.setStyleSheet("color: red;")
         elif 17 <= value < 33:
+            infos['acupoint_title'] = self.ui.nazi_title_2.text()
             infos['acupoint'] = self.ui.label_NaZi2.text()
             self.remove_label_highlight()
             self.ui.label_NaZi2.setStyleSheet("color: red;")
         elif 33 <= value < 50:
+            infos['acupoint_title'] = self.ui.nazi_title_3.text()
             infos['acupoint'] = self.ui.label_NaZi3.text()
             self.remove_label_highlight()
             self.ui.label_NaZi3.setStyleSheet("color: red;")
         elif 50 <= value <= 67:
+            infos['acupoint_title'] = self.ui.nazi_title_4.text()
             infos['acupoint'] = self.ui.label_NaZi4.text()
             self.remove_label_highlight()
             self.ui.label_NaZi4.setStyleSheet("color: red;")
         elif 67 <= value < 83:
+            infos['acupoint_title'] = self.ui.nazi_title_5.text()
             infos['acupoint'] = self.ui.label_NaZi5.text()
             self.remove_label_highlight()
             self.ui.label_NaZi5.setStyleSheet("color: red;")
         elif 83 <= value <= 100:
+            infos['acupoint_title'] = self.ui.nazi_title_6.text()
             infos['acupoint'] = self.ui.label_NaZi6.text()
             self.remove_label_highlight()
             self.ui.label_NaZi6.setStyleSheet("color: red;")

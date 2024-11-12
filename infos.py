@@ -13,6 +13,7 @@ infos = {
     'program': '~',
     'order': '~',
     'type': '~',
+    'acupoint_title': '~',
     'acupoint': '~',
     'output': {
         'date_gan': '~',

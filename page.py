@@ -5,6 +5,7 @@ from ui_page_NaZi import Ui_NaZiForm
 from ui_page import Ui_ItemForm
 
 from ui_feiteng_linggui_display import Ui_feiteng_linggui_display
+from najia_nazi_time_acupoint import Najia_Nazi_Time_Acupoint
 from feiteng_display import FeiTengDisplay
 from linggui_display import LingGuiDisplay
 from output import OutputPage
@@ -49,6 +50,9 @@ class BasePage(QWidget):
         super(BasePage, self).__init__()
         self.delegate = CompleterDelegate()
 
+        self.output_page = OutputPage()
+
+
     def set_text_to_model(self, row, col, text):
         item = QStandardItem(text)
         item.setFlags(item.flags() & ~Qt.ItemIsEditable)
@@ -63,6 +67,36 @@ class BasePage(QWidget):
         col_count = self.model.columnCount()
         for col in range(col_count):
             self.model.setItem(row, col, QStandardItem(''))
+
+    @Slot()
+    def on_click(self):
+        # self.output_page.set_space_display(display_widget)
+        list_experience = self.get_experience()
+        self.output_page.set_experience(list_experience)
+
+        time_acupoint_widget = Najia_Nazi_Time_Acupoint(infos['acupoint_title'], infos['acupoint'])
+        self.output_page.ui.verticalLayout.replaceWidget(self.output_page.ui.widget, time_acupoint_widget)
+
+        self.model.removeRow(2)
+        idx = self.output_page.ui.stackedWidget.addWidget(self.ui.tableView)
+        self.output_page.ui.stackedWidget.setCurrentIndex(idx)
+
+        self.output_page.ui.pushButton_custom.setDisabled(True)
+        self.output_page.show()
+        self.output_page.set_from_infos()
+        self.hide()
+
+    def get_experience(self):
+        row = self.model.rowCount() - 1
+
+        row_data = []
+        for col in range(self.model.columnCount()):
+            item = self.model.item(row, col)
+            if item is not None:
+                row_data.append(item.text())
+    
+        return row_data
+
 
 class ItemBasePage(QWidget):
     def __init__(self):
@@ -165,6 +199,8 @@ class NaJiaPage(BasePage):
 
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.verticalHeader().setStyleSheet(header_style)
+
+        self.ui.next_btn.clicked.connect(self.on_click)
     
     def update_model(self):
         self.set_texts_to_row(0, infos['output']['NaJia']['SpatialXue'])
@@ -186,6 +222,7 @@ class NaZiPage(BasePage):
         self.ui.radioButton.clicked.connect(self.on_click_small)
         self.ui.radioButton_2.clicked.connect(self.on_click_big)
 
+        self.ui.next_btn.clicked.connect(self.on_click)
 
 
     def update_model(self):
