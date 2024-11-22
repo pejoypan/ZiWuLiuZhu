@@ -51,3 +51,18 @@ infos = {
             }
         }
     }
+
+def get_hexagram_str(hexagram):
+    hexagram_map = {
+    '乾': '\u2630',
+    '兑': '\u2631',
+    '离': '\u2632',
+    '震': '\u2633',
+    '巽': '\u2634',
+    '坎': '\u2635',
+    '艮': '\u2636',
+    '坤': '\u2637',
+    }
+
+    return f'{hexagram}{hexagram_map[hexagram]}' if hexagram in hexagram_map else hexagram
+

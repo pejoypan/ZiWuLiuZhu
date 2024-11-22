@@ -6,8 +6,8 @@ from ui_page import Ui_ItemForm
 
 from ui_feiteng_linggui_display import Ui_feiteng_linggui_display
 from najia_nazi_time_acupoint import Najia_Nazi_Time_Acupoint
-from feiteng_display import FeiTengDisplay
-from linggui_display import LingGuiDisplay
+from feiteng_linggui_display import FeiTengLingGuiDisplay
+
 from output import OutputPage
 
 from PySide6.QtWidgets import QApplication, QWidget, QHeaderView, QTableWidgetItem
@@ -19,30 +19,6 @@ from completer import CompleterDelegate
 
 header_style = "font: 700 14pt;"
 
-class DisplayWidget(QWidget):
-    def __init__(self, is_FT=True):
-        super(DisplayWidget, self).__init__()
-        self.ui = Ui_feiteng_linggui_display()
-        self.ui.setupUi(self)
-
-        self.neck_back_widget = FeiTengDisplay() if is_FT else LingGuiDisplay()
-        self.ui.verticalLayout.replaceWidget(self.ui.widget, self.neck_back_widget)
-
-        self.head_hand_widget = FeiTengDisplay(left_first=False) if is_FT else LingGuiDisplay(left_first=False)
-        self.ui.verticalLayout_2.replaceWidget(self.ui.widget_2, self.head_hand_widget)
-
-        self.stomach_widget = FeiTengDisplay(left_first=False) if is_FT else LingGuiDisplay(left_first=False)
-        self.ui.verticalLayout_3.replaceWidget(self.ui.widget_3, self.stomach_widget)
-        # self.ui.widget_2 = SingleWidget()
-        # self.ui.widget_3 = SingleWidget()
-
-    def set_from_table(self, table):
-
-        self.neck_back_widget.set_from_table(table, col_id=1)
-
-        self.head_hand_widget.set_from_table(table, col_id=2)
-
-        self.stomach_widget.set_from_table(table, col_id=3)
         
 
 class BasePage(QWidget):
@@ -75,7 +51,9 @@ class BasePage(QWidget):
         self.output_page.set_experience(list_experience)
 
         time_acupoint_widget = Najia_Nazi_Time_Acupoint(infos['acupoint_title'], infos['acupoint'])
-        self.output_page.ui.verticalLayout.replaceWidget(self.output_page.ui.widget, time_acupoint_widget)
+        idx = self.output_page.ui.stackedWidget_time.addWidget(time_acupoint_widget)
+        self.output_page.ui.stackedWidget_time.setCurrentIndex(idx)
+        # self.output_page.ui.verticalLayout.replaceWidget(self.output_page.ui.widget, time_acupoint_widget)
 
         self.model.removeRow(2)
         idx = self.output_page.ui.stackedWidget.addWidget(self.ui.tableView)
@@ -173,7 +151,7 @@ class ItemBasePage(QWidget):
     @Slot()
     def on_click(self):
         is_FT = infos['program'] == '飞腾八法'
-        display_widget = DisplayWidget(is_FT)
+        display_widget = FeiTengLingGuiDisplay(is_FT)
         display_widget.set_from_table(self.ui.table)
         self.output_page.set_space_display(display_widget)
         list_experience = self.get_experience()

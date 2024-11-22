@@ -50,19 +50,8 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="widget" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>202</width>
-         <height>202</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>202</width>
-         <height>202</height>
-        </size>
-       </property>
+      <widget class="QStackedWidget" name="stackedWidget">
+       <widget class="QWidget" name="stackedWidgetPage1"/>
       </widget>
      </item>
     </layout>
@@ -91,19 +80,8 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="widget_2" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>202</width>
-         <height>202</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>202</width>
-         <height>202</height>
-        </size>
-       </property>
+      <widget class="QStackedWidget" name="stackedWidget_2">
+       <widget class="QWidget" name="stackedWidget_2Page1"/>
       </widget>
      </item>
     </layout>
@@ -132,19 +110,8 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="widget_3" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>202</width>
-         <height>202</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>202</width>
-         <height>202</height>
-        </size>
-       </property>
+      <widget class="QStackedWidget" name="stackedWidget_3">
+       <widget class="QWidget" name="stackedWidget_3Page1"/>
       </widget>
      </item>
     </layout>

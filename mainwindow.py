@@ -6,19 +6,9 @@ import yaml
 import logging
 from datetime import datetime
 from calculator import Calculator
-from infos import infos
+from infos import infos, get_hexagram_str
 from page import NaJiaPage, NaZiPage, LingGui8Page, FeiTengPage
-
-hexagram_map = {
-    '乾': '\u2630',
-    '兑': '\u2631',
-    '离': '\u2632',
-    '震': '\u2633',
-    '巽': '\u2634',
-    '坎': '\u2635',
-    '艮': '\u2636',
-    '坤': '\u2637',
-}
+from feiteng_linggui_time_acupoint import Feiteng_Linggui_Time_Acupoint
 
 
 
@@ -104,7 +94,7 @@ class MainWindow(QMainWindow):
     @Slot()
     def on_generate(self):
         logger.info(infos)
-        self.hide()
+        # self.hide()
         if infos['program'] == '纳甲法':
             self.najia_page.update_model()
             self.najia_page.show()
@@ -114,11 +104,17 @@ class MainWindow(QMainWindow):
         elif infos['program'] == '灵龟八法':
             self.linggui8_page.update_model()
             self.linggui8_page.show()
-            self.linggui8_page.output_page.ui.verticalLayout.replaceWidget(self.linggui8_page.output_page.ui.widget, self.ui.gridWidget_2)
+            feiteng_linggui_time_widget = Feiteng_Linggui_Time_Acupoint(is_FT=False)
+            idx = self.linggui8_page.output_page.ui.stackedWidget_time.addWidget(feiteng_linggui_time_widget)
+            self.linggui8_page.output_page.ui.stackedWidget_time.setCurrentIndex(idx)
+            # self.linggui8_page.output_page.ui.verticalLayout.replaceWidget(self.linggui8_page.output_page.ui.widget, self.ui.gridWidget_2)
         elif infos['program'] == '飞腾八法':
             self.feiteng_page.update_model()
             self.feiteng_page.show()
-            self.feiteng_page.output_page.ui.verticalLayout.replaceWidget(self.feiteng_page.output_page.ui.widget, self.ui.gridWidget_4)
+            feiteng_linggui_time_widget = Feiteng_Linggui_Time_Acupoint(is_FT=True)
+            idx = self.feiteng_page.output_page.ui.stackedWidget_time.addWidget(feiteng_linggui_time_widget)
+            self.feiteng_page.output_page.ui.stackedWidget_time.setCurrentIndex(idx)
+            # self.feiteng_page.output_page.ui.verticalLayout.replaceWidget(self.feiteng_page.output_page.ui.widget, self.ui.gridWidget_4)
         else:
             pass
 
@@ -382,7 +378,7 @@ class MainWindow(QMainWindow):
         self.ui.label_LingGui1.setText(str(jiu_gong_shu))
 
         hexagram = infos['output']['LingGui8']['Hexagram']
-        str_hexagram = f'{hexagram}{hexagram_map[hexagram]}' if hexagram in hexagram_map else hexagram
+        str_hexagram = get_hexagram_str(hexagram)
         self.ui.label_LingGui2.setText(str_hexagram)
 
         self.ui.label_LingGui3.setText(infos['output']['LingGui8']['ZhuXue'])
@@ -393,7 +389,7 @@ class MainWindow(QMainWindow):
         self.ui.label_FeiTeng1.setText(str(gua_wei))
 
         hexagram = infos['output']['FeiTeng8']['Hexagram']
-        str_hexagram = f'{hexagram}{hexagram_map[hexagram]}' if hexagram in hexagram_map else hexagram
+        str_hexagram = get_hexagram_str(hexagram)
         self.ui.label_FeiTeng2.setText(str_hexagram)
 
         self.ui.label_FeiTeng3.setText(infos['output']['FeiTeng8']['ZhuXue'])

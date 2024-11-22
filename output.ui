@@ -13,6 +13,13 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">color: black;
+border-color: rgb(0, 0, 0);
+gridline-color: rgb(128, 128, 128);
+background-color: rgb(255, 255, 255);
+</string>
+  </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -74,7 +81,8 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset theme="QIcon::ThemeIcon::DocumentPrint"/>
+         <iconset resource="icons.qrc">
+          <normaloff>:/icon/icons/printer.png</normaloff>:/icon/icons/printer.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -519,13 +527,14 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="widget" native="true">
+     <widget class="QStackedWidget" name="stackedWidget_time">
       <property name="minimumSize">
        <size>
         <width>0</width>
         <height>80</height>
        </size>
       </property>
+      <widget class="QWidget" name="stackedWidgetPage1" native="true"/>
      </widget>
     </item>
     <item>
@@ -589,7 +598,7 @@
         <height>250</height>
        </size>
       </property>
-      <widget class="QWidget" name="stackedWidget_2Page1" native="true"/>
+      <widget class="QWidget" name="stackedWidget_2Page1"/>
      </widget>
     </item>
     <item>
