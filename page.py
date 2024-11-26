@@ -7,6 +7,7 @@ from ui_page import Ui_ItemForm
 from ui_feiteng_linggui_display import Ui_feiteng_linggui_display
 from najia_nazi_time_acupoint import Najia_Nazi_Time_Acupoint
 from feiteng_linggui_display import FeiTengLingGuiDisplay
+from najia_nazi_display import NajiaNaziDisplay
 
 from output import OutputPage
 
@@ -55,8 +56,12 @@ class BasePage(QWidget):
         self.output_page.ui.stackedWidget_time.setCurrentIndex(idx)
         # self.output_page.ui.verticalLayout.replaceWidget(self.output_page.ui.widget, time_acupoint_widget)
 
-        self.model.removeRow(2)
-        idx = self.output_page.ui.stackedWidget.addWidget(self.ui.tableView)
+
+        space_acupoint_widget = NajiaNaziDisplay(infos['program'] == '纳甲法')
+        space_acupoint_widget.set_space_acupoint(self.get_row_data(0))
+        space_acupoint_widget.set_bottom_acupoint(self.get_row_data(1))
+        # self.model.removeRow(2)
+        idx = self.output_page.ui.stackedWidget.addWidget(space_acupoint_widget)
         self.output_page.ui.stackedWidget.setCurrentIndex(idx)
 
         self.output_page.ui.pushButton_custom.setDisabled(True)
@@ -67,12 +72,16 @@ class BasePage(QWidget):
     def get_experience(self):
         row = self.model.rowCount() - 1
 
+        return self.get_row_data(row)
+
+
+    def get_row_data(self, row):
         row_data = []
         for col in range(self.model.columnCount()):
             item = self.model.item(row, col)
             if item is not None:
                 row_data.append(item.text())
-    
+
         return row_data
 
 

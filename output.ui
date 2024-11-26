@@ -534,7 +534,7 @@ background-color: rgb(255, 255, 255);
         <height>80</height>
        </size>
       </property>
-      <widget class="QWidget" name="stackedWidgetPage1" native="true"/>
+      <widget class="QWidget" name="stackedWidgetPage1"/>
      </widget>
     </item>
     <item>
@@ -625,6 +625,12 @@ background-color: rgb(255, 255, 255);
       </item>
       <item>
        <widget class="QTableWidget" name="tableWidget">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>82</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
