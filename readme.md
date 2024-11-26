@@ -1,5 +1,7 @@
 # Requirements
 
+pip install -r requirements.txt
+
 # Modify UI Design
 
 ```
@@ -8,13 +10,14 @@ pyside6-designer
 
 # Generate UI Python Code
 
+## Windows
 ```
-pyside6-uic mainwindow.ui -o ui_mainwindow.py
-pyside6-uic page_NaJia.ui -o ui_page_NaJia.py
-pyside6-uic page_NaZi.ui -o ui_page_NaZi.py
-pyside6-uic page.ui -o ui_page.py
-pyside6-uic output.ui -o ui_output.py
-pyside6-uic feiteng_linggui_display.ui -o ui_feiteng_linggui_display.py
+uic.cmd
+```
+
+## Mac OS X
+```
+uic.sh
 ```
 
 # Generate Resource
@@ -32,6 +35,14 @@ python mainwindow.py
 
 # Deploy
 
+## Windows
+
 ```
 pyinstaller mainwindow.py --onefile --noconsole --icon=hexagram.ico
+```
+
+## Mac OS X
+
+```
+pyinstaller mainwindow.py --onefile --noconsole
 ```
