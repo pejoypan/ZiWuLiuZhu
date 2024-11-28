@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>197</height>
+    <height>207</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -21,6 +21,11 @@
     <width>640</width>
     <height>16777215</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -84,6 +89,7 @@
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>22</pointsize>
         </font>
        </property>
@@ -112,6 +118,7 @@
       <widget class="QRadioButton" name="radioButton">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
         </font>
        </property>
@@ -127,6 +134,7 @@
       <widget class="QRadioButton" name="radioButton_2">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
         </font>
        </property>
@@ -179,6 +187,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Arial</family>
        <pointsize>12</pointsize>
       </font>
      </property>

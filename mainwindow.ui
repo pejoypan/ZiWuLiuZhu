@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>640</height>
+    <height>691</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,11 +22,11 @@
     <height>640</height>
    </size>
   </property>
-  <property name="maximumSize">
-   <size>
-    <width>640</width>
-    <height>640</height>
-   </size>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>14</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>子午流注时穴查询器</string>
@@ -42,7 +42,7 @@
       <x>10</x>
       <y>10</y>
       <width>621</width>
-      <height>611</height>
+      <height>673</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -84,6 +84,7 @@
          </property>
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
@@ -97,6 +98,7 @@
         <widget class="QLabel" name="label_date_gan_zhi">
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -121,6 +123,7 @@
          </property>
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
@@ -146,6 +149,7 @@
          </property>
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -161,6 +165,7 @@
          </property>
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
@@ -186,6 +191,7 @@
          </property>
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -195,6 +201,7 @@
         <widget class="QLabel" name="label_hour_gan_zhi">
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -213,6 +220,7 @@
          </property>
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -257,6 +265,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>14</pointsize>
             </font>
            </property>
@@ -281,6 +290,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>14</pointsize>
             </font>
            </property>
@@ -305,6 +315,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>14</pointsize>
             </font>
            </property>
@@ -329,6 +340,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>14</pointsize>
             </font>
            </property>
@@ -348,6 +360,7 @@
              <widget class="QLabel" name="najia_title_1">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -364,6 +377,7 @@
              <widget class="QLabel" name="label_NaJia4">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -379,6 +393,7 @@
              <widget class="QLabel" name="najia_title_4">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -395,6 +410,7 @@
              <widget class="QLabel" name="najia_title_2">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -411,6 +427,7 @@
              <widget class="QLabel" name="label_NaJia1">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <underline>false</underline>
                </font>
@@ -427,6 +444,7 @@
              <widget class="QLabel" name="label_NaJia3">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -442,6 +460,7 @@
              <widget class="QLabel" name="najia_title_3">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -460,6 +479,7 @@
                <widget class="QLabel" name="label_NaJia2">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>14</pointsize>
                  </font>
                 </property>
@@ -475,6 +495,7 @@
                <widget class="QLabel" name="label_NaJia_">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>14</pointsize>
                  </font>
                 </property>
@@ -509,6 +530,7 @@
              <widget class="QLabel" name="label_NaZi4">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -524,6 +546,7 @@
              <widget class="QLabel" name="nazi_title_4">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -540,6 +563,7 @@
              <widget class="QLabel" name="label_NaZi5">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -555,6 +579,7 @@
              <widget class="QLabel" name="nazi_title_6">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -571,6 +596,7 @@
              <widget class="QLabel" name="label_NaZi2">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -586,6 +612,7 @@
              <widget class="QLabel" name="nazi_title_2">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -602,6 +629,7 @@
              <widget class="QLabel" name="nazi_title_3">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -618,6 +646,7 @@
              <widget class="QLabel" name="label_NaZi6">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -633,6 +662,7 @@
              <widget class="QLabel" name="nazi_title_5">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -649,6 +679,7 @@
              <widget class="QLabel" name="label_NaZi1">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -664,6 +695,7 @@
              <widget class="QLabel" name="label_NaZi3">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -679,6 +711,7 @@
              <widget class="QLabel" name="nazi_title_1">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -715,6 +748,7 @@
              <widget class="QLabel" name="label_LingGui3">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -730,6 +764,7 @@
              <widget class="QLabel" name="label_16">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -746,6 +781,7 @@
              <widget class="QLabel" name="label_13">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -762,6 +798,7 @@
              <widget class="QLabel" name="label_LingGui1">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -777,6 +814,7 @@
              <widget class="QLabel" name="label_15">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -793,6 +831,7 @@
              <widget class="QLabel" name="label_LingGui2">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -808,6 +847,7 @@
              <widget class="QLabel" name="label_17">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -824,6 +864,7 @@
              <widget class="QLabel" name="label_LingGui4">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -852,6 +893,7 @@
              <widget class="QLabel" name="label_FeiTeng2">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -867,6 +909,7 @@
              <widget class="QLabel" name="label_32">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -883,6 +926,7 @@
              <widget class="QLabel" name="label_FeiTeng3">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -898,6 +942,7 @@
              <widget class="QLabel" name="label_FeiTeng1">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -913,6 +958,7 @@
              <widget class="QLabel" name="label_35">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -929,6 +975,7 @@
              <widget class="QLabel" name="label_34">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -945,6 +992,7 @@
              <widget class="QLabel" name="label_36">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                 <bold>true</bold>
                </font>
@@ -961,6 +1009,7 @@
              <widget class="QLabel" name="label_FeiTeng4">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>14</pointsize>
                </font>
               </property>
@@ -1011,6 +1060,7 @@
             <widget class="QLabel" name="label_7">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>14</pointsize>
                <bold>true</bold>
               </font>
@@ -1030,6 +1080,7 @@
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>14</pointsize>
               </font>
              </property>
@@ -1071,6 +1122,7 @@
           <widget class="QLabel" name="label_5">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>14</pointsize>
              <bold>true</bold>
             </font>
@@ -1090,6 +1142,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>14</pointsize>
             </font>
            </property>
@@ -1166,27 +1219,27 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="minimumSize">
-          <size>
-           <width>80</width>
-           <height>80</height>
-          </size>
-         </property>
          <property name="maximumSize">
           <size>
-           <width>80</width>
-           <height>80</height>
+           <width>16777215</width>
+           <height>50</height>
           </size>
          </property>
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>16</pointsize>
            <bold>true</bold>
           </font>
          </property>
-         <property name="text">
-          <string>生成
-方案</string>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::GoNext"/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -1195,7 +1248,6 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="icons.qrc"/>

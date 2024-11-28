@@ -10,6 +10,11 @@
     <height>100</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -20,6 +25,7 @@
       <widget class="QLabel" name="title_1">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
          <bold>true</bold>
         </font>
@@ -36,6 +42,7 @@
       <widget class="QLabel" name="text_1">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
         </font>
        </property>
@@ -55,6 +62,7 @@
       <widget class="QLabel" name="title_2">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
          <bold>true</bold>
         </font>
@@ -71,6 +79,7 @@
       <widget class="QLabel" name="text_2">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
         </font>
        </property>
@@ -90,6 +99,7 @@
       <widget class="QLabel" name="title_3">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
          <bold>true</bold>
         </font>
@@ -106,6 +116,7 @@
       <widget class="QLabel" name="text_3">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
         </font>
        </property>
@@ -125,6 +136,7 @@
       <widget class="QLabel" name="title_4">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
          <bold>true</bold>
         </font>
@@ -141,6 +153,7 @@
       <widget class="QLabel" name="text_4">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>14</pointsize>
         </font>
        </property>

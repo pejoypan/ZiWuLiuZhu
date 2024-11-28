@@ -7,8 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>202</width>
-    <height>229</height>
+    <height>234</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -63,6 +68,7 @@
         </property>
         <property name="font">
          <font>
+          <family>Arial</family>
           <pointsize>14</pointsize>
          </font>
         </property>
@@ -110,6 +116,7 @@
         </property>
         <property name="font">
          <font>
+          <family>Arial</family>
           <pointsize>14</pointsize>
          </font>
         </property>
@@ -156,6 +163,11 @@
       </property>
       <item row="2" column="2">
        <widget class="QWidget" name="verticalWidget_9" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -176,6 +188,7 @@
           <widget class="QLabel" name="label_19">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -200,6 +213,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -219,6 +233,11 @@
       </item>
       <item row="0" column="0">
        <widget class="QWidget" name="verticalWidget" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -239,6 +258,7 @@
           <widget class="QLabel" name="label_3">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -263,6 +283,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -282,6 +303,11 @@
       </item>
       <item row="0" column="1">
        <widget class="QWidget" name="verticalWidget_2" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -302,6 +328,7 @@
           <widget class="QLabel" name="label_5">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -326,6 +353,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -345,6 +373,11 @@
       </item>
       <item row="0" column="2">
        <widget class="QWidget" name="verticalWidget_3" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -365,6 +398,7 @@
           <widget class="QLabel" name="label_7">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -389,6 +423,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -408,6 +443,11 @@
       </item>
       <item row="1" column="0">
        <widget class="QWidget" name="verticalWidget_4" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -428,6 +468,7 @@
           <widget class="QLabel" name="label_9">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -452,6 +493,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -471,6 +513,11 @@
       </item>
       <item row="1" column="1">
        <widget class="QWidget" name="verticalWidget_5" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -491,6 +538,7 @@
           <widget class="QLabel" name="label_11">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -515,6 +563,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -534,6 +583,11 @@
       </item>
       <item row="1" column="2">
        <widget class="QWidget" name="verticalWidget_6" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -554,6 +608,7 @@
           <widget class="QLabel" name="label_13">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -578,6 +633,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -597,6 +653,11 @@
       </item>
       <item row="2" column="0">
        <widget class="QWidget" name="verticalWidget_7" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -617,6 +678,7 @@
           <widget class="QLabel" name="label_15">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -641,6 +703,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -660,6 +723,11 @@
       </item>
       <item row="2" column="1">
        <widget class="QWidget" name="verticalWidget_8" native="true">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border: 1px solid gray</string>
         </property>
@@ -680,6 +748,7 @@
           <widget class="QLabel" name="label_17">
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -704,6 +773,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
             </font>
            </property>

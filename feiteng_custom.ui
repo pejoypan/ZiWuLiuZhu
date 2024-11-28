@@ -7,8 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>202</width>
-    <height>229</height>
+    <height>234</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -63,6 +68,7 @@
         </property>
         <property name="font">
          <font>
+          <family>Arial</family>
           <pointsize>14</pointsize>
          </font>
         </property>
@@ -110,6 +116,7 @@
         </property>
         <property name="font">
          <font>
+          <family>Arial</family>
           <pointsize>14</pointsize>
          </font>
         </property>
