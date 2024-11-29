@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow, QButtonGroup
+from PySide6.QtWidgets import QApplication, QMainWindow, QButtonGroup, QMessageBox
 from PySide6.QtCore import QFile, QDate, QTime, Signal, Slot
 from ui_mainwindow import Ui_MainWindow
 import yaml
@@ -10,6 +10,8 @@ from infos import infos, get_hexagram_str
 from page import NaJiaPage, NaZiPage, LingGui8Page, FeiTengPage
 from feiteng_linggui_time_acupoint import Feiteng_Linggui_Time_Acupoint
 
+import ViKey
+from ctypes import *
 
 
 current_date = QDate.currentDate()
@@ -401,6 +403,15 @@ class MainWindow(QMainWindow):
 def initialize():
     pass
 
+def verify_dongle_vikey():
+    conut = c_int()
+    ret = ViKey.VikeyFind(byref(conut))
+    if ret == 0:
+        logger.info(f'found {conut.value} vikeys')
+    else:
+        QMessageBox.critical(None, '错误', '没有找到加密狗\n请联系:13911791190')
+        sys.exit(1)
+
 if __name__ == "__main__":
     # log_file_name = f'{current_date.toPython()}-{current_time.hour()}{current_time.minute()}{current_time.second()}.log'
     # logging.basicConfig(filename = log_file_name, filemode = 'w', level = logging.DEBUG)
@@ -412,6 +423,9 @@ if __name__ == "__main__":
     initialize()
 
     window = MainWindow()
+
+    verify_dongle_vikey()
+
     window.show()
 
     sys.exit(app.exec())
