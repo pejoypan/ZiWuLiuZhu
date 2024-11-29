@@ -140,7 +140,7 @@ class ItemBasePage(QWidget):
     def fake_header(self, text):
         item = QTableWidgetItem(text)
         item.setFlags(item.flags() & ~Qt.ItemIsEditable)
-        item.setFont(QFont("Microsoft YaHei UI", 16, QFont.Bold))
+        item.setFont(QFont("Arial", 16, QFont.Bold))
         item.setTextAlignment(Qt.AlignCenter)
         return item
 
