@@ -6,5 +6,6 @@
     <file>icons/switch.png</file>
     <file>icons/edit.png</file>
     <file>icons/printer.png</file>
+    <file>icons/Hourglass.gif</file>
   </qresource>
 </RCC>

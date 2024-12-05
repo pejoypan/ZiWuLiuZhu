@@ -9,6 +9,7 @@ from calculator import Calculator
 from infos import infos, get_hexagram_str
 from page import NaJiaPage, NaZiPage, LingGui8Page, FeiTengPage
 from feiteng_linggui_time_acupoint import Feiteng_Linggui_Time_Acupoint
+from loading import LoadingWidget
 
 import ViKey
 from ctypes import *
@@ -405,9 +406,28 @@ def initialize():
 
 def verify_dongle_vikey():
     conut = c_int()
+    index = c_short()
     ret = ViKey.VikeyFind(byref(conut))
+
     if ret == 0:
         logger.info(f'found {conut.value} vikeys')
+
+        soft_id = create_string_buffer(8)		
+        ret = ViKey.VikeyGetSoftIDString(index, soft_id)
+
+        if ret == 0 :
+            logger.info(f'soft id: {soft_id.value}')
+
+            if soft_id.value == b'HEXAGRAM':
+                logger.info('verify success')
+            else:
+                QMessageBox.critical(None, '错误', '加密狗未授权\n请联系:13911791190')
+                sys.exit(1)
+
+        else:
+            QMessageBox.critical(None, '错误', f'无法读取加密狗 {ret}\n请联系:13911791190')
+            sys.exit(1)
+            
     else:
         QMessageBox.critical(None, '错误', '没有找到加密狗\n请联系:13911791190')
         sys.exit(1)
@@ -420,11 +440,16 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
 
+    loading_widget = LoadingWidget()
+    loading_widget.show()
+
     initialize()
 
     window = MainWindow()
 
     verify_dongle_vikey()
+
+    loading_widget.stop()
 
     window.show()
 
