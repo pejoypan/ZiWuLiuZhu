@@ -70,6 +70,11 @@ class OutputPage(QWidget):
 
         self.ui.label_18.setText(infos['type'])
 
+        if infos['program'] == '灵龟八法':
+            self.ui.label_20.setText('空间九宫穴位')
+        elif infos['program'] == '飞腾八法':
+            self.ui.label_20.setText('空间八卦穴位')
+
     @Slot()
     def export_to_img(self):
 
